@@ -7,10 +7,23 @@ module.exports = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      fontFamily: {
+        oswald: ['var(--font-oswald)'],
+        cormorant: ['var(--font-cormorant)'],
+      },
+      colors: {
+        primary: {
+          100: 'rgba(70,133,255, 0.1)',
+          200: 'rgba(70,133,255, 0.3)',
+          300: 'rgba(70,133,255, 0.4)',
+          400: 'rgba(70,133,255, 0.5)',
+          500: 'rgba(70,133,255, 0.6)',
+          600: 'rgba(70,133,255, 0.7)',
+          700: 'rgba(70,133,255, 0.8)',
+          800: 'rgba(70,133,255, 0.9)',
+          900: 'rgba(70,133,255, 1)',
+        },
+        secondary: '#564e48',
       },
     },
   },
