@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai'
+import { IoMdArrowDropdown } from 'react-icons/io'
 import { usePathname } from 'next/navigation'
 import Image from 'next/image'
 import { navLinks } from '@/data'
@@ -29,7 +30,7 @@ const Navbar = () => {
           : 'bg-black/50'
       }`}
     >
-      <div className='flex items-center justify-between px-4 py-2 max-w-7xl mx-auto'>
+      <div className='flex items-center justify-between px-5 md:px-14 xl:px-6 py-2 max-w-7xl mx-auto'>
         <div className='flex items-center justify-between w-full'>
           <Link href='/' className='flex items-center gap-2'>
             <Image
@@ -51,22 +52,54 @@ const Navbar = () => {
           >
             {navLinks.map((lnk) => {
               const isActive = pathname === lnk.route
-              return (
-                <Link
-                  href={lnk.route}
-                  key={lnk.id}
-                  onClick={() => setMenuOn(false)}
-                  className={`hover:text-white text-gray-200 text-lg transition font-semibold ${
-                    isActive ? 'text-primary-900' : ''
-                  } ${
-                    menuOn
-                      ? 'hover:bg-primary-100 w-full text-center py-2 rounded-lg'
-                      : ''
-                  }`}
-                >
-                  {lnk.text}
-                </Link>
-              )
+              if (lnk.route) {
+                return (
+                  <Link
+                    href={lnk.route}
+                    key={lnk.id}
+                    onClick={() => setMenuOn(false)}
+                    className={`hover:text-primary-900 text-gray-200 text-lg transition font-semibold ${
+                      isActive && 'text-primary-900'
+                    } ${
+                      menuOn &&
+                      'hover:bg-primary-100 w-full text-center py-2 rounded-lg'
+                    }`}
+                  >
+                    {lnk.text}
+                  </Link>
+                )
+              } else {
+                return (
+                  <div
+                    className='relative group flex gap-1 md:block items-center flex-col'
+                    key={lnk.id}
+                  >
+                    <div
+                      className={`hover:text-primary-900 py-3 text-gray-200 text-lg touch-none select-none font-semibold flex items-center cursor-pointer transition ${
+                        lnk?.subMenu?.some((item) => item.route === pathname)
+                          ? 'border-primary-900 text-primary-900'
+                          : 'border-transparent text-gray-200'
+                      }`}
+                    >
+                      {lnk.text}
+                      <IoMdArrowDropdown className='text-lg' />
+                    </div>
+                    <div className='absolute left-1/2 translate-x-[-50%] hidden z-50 top-12 group-hover:block bg-white text-primary-900 border shadow-lg w-52'>
+                      {lnk.subMenu?.map((item) => (
+                        <Link
+                          href={item.route}
+                          key={item.id}
+                          onClick={() => setMenuOn(false)}
+                        >
+                          <p className='p-3 text-center text-base hover:bg-gray-200 transition'>
+                            {item.text}
+                          </p>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )
+              }
             })}
           </nav>
         </div>

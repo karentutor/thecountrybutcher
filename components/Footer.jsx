@@ -1,4 +1,4 @@
-import { navLinks, socialLinks } from '@/data'
+import { footerLinks, navLinks, socialLinks } from '@/data'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FaMailBulk, FaMap, FaPhone } from 'react-icons/fa'
@@ -24,7 +24,7 @@ const Footer = () => {
         </Link>
         <div>
           <ul className='flex flex-col items-center justify-center md:items-start gap-4 my-6'>
-            {navLinks.map((link) => (
+            {footerLinks.map((link) => (
               <li key={link.id}>
                 <Link
                   href={link.route}

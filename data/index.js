@@ -2,9 +2,29 @@ import { FaFacebook, FaInstagram } from 'react-icons/fa'
 
 export const navLinks = [
   { id: 1, text: 'Home', route: '/' },
-  { id: 2, text: 'About', route: '/about' },
-  { id: 3, text: 'Services', route: '/services' },
-  { id: 4, text: 'Shop', route: '/shop' },
+  {
+    id: 2,
+    text: 'About Us',
+    subMenu: [
+      { id: 1, text: 'Our Story', route: '/our-story' },
+      { id: 2, text: 'Contact', route: '/contact' },
+    ],
+  },
+  {
+    id: 4,
+    text: 'Shop',
+    subMenu: [
+      { id: 1, text: 'Product List', route: '/product-list' },
+      { id: 2, text: 'Shop Retail', route: '/shop-retail' },
+    ],
+  },
+]
+export const footerLinks = [
+  { id: 1, text: 'Home', route: '/' },
+  { id: 2, text: 'Our Story', route: '/our-story' },
+  { id: 3, text: 'Contact', route: '/contact' },
+  { id: 4, text: 'Product List', route: '/product-list' },
+  { id: 5, text: 'Shop Retail', route: '/shop-retail' },
 ]
 export const slides = [
   '/imgs/slide1.webp',

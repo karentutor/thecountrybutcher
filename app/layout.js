@@ -2,6 +2,7 @@ import Navbar from '@/components/Navbar'
 import './globals.css'
 import { Oswald, Cormorant_Garamond } from 'next/font/google'
 import Footer from '@/components/Footer'
+import Map from '@/components/Map'
 import ScrollToTop from '@/components/ScrollToTop'
 
 const oswald = Oswald({ subsets: ['latin'], variable: '--font-oswald' })
@@ -25,6 +26,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         {children}
         <ScrollToTop />
+        <Map />
         <Footer />
       </body>
     </html>

@@ -28,7 +28,7 @@ const ScrollToTop = () => {
   return (
     <button
       onClick={scrollToTop}
-      className={`h-12 w-12 shadow-md bg-primary-900 hover:scale-105 text-white transition items-center justify-center md:w-16 md:h-16 fixed bottom-8 md:bottom-12 right-8 md:right-12 z-40 ${
+      className={`h-12 w-12 shadow-md bg-primary-800 hover:bg-primary-900 text-white transition items-center justify-center md:w-16 md:h-16 fixed bottom-8 md:bottom-12 right-8 md:right-12 z-40 ${
         scrollTop ? 'flex' : 'hidden'
       }`}
     >
