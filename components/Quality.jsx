@@ -6,25 +6,24 @@ const Quality = () => {
       {/* Content */}
       <div className='flex-1 px-6 md:px-10 py-10 md:py-24 flex flex-col gap-4 md:gap-8 bg-white font-cormorant'>
         <h3 className='uppercase text-4xl text-secondary font-bold font-oswald leading-relaxed md:!leading-[4rem]'>
-          The Country Butcher QUALITY
+          Lorem ipsum dolor sit amet.
         </h3>
         <p className='text-2xl text-gray-600 font-bold'>
-          For more than 30 years, The Country Butcher Meats has been helping
-          families eat better and live healthier lives.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis
+          eius quibusdam modi dolor adipisci sapiente?
         </p>
         <p className='text-2xl text-gray-600 font-bold'>
-          Our retail store offers a wide selection of fresh and frozen cuts for
-          you to choose from. Our storefront has a variety of cuts of beef,
-          pork, chicken, and lamb, as well as our in house made sausages and
-          smoked products. We also offer 10 lb cases and mixed meat packs to
-          stock your freezer. Most of our customers don’t make it out the door,
-          before biting into a piece of our famous homemade pepperoni!
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure est vel
+          consequuntur mollitia beatae amet odit suscipit repudiandae sit
+          voluptatibus molestiae nam, cum illo quod? Quos ex nulla consectetur,
+          dolor inventore, ut quod tempora recusandae molestias asperiores eos
+          maxime nostrum.
         </p>
       </div>
       {/* Image */}
       <div className='flex-1 w-full'>
         <Image
-          src='/imgs/quality.png'
+          src='/imgs/quality.jpg'
           alt='meat'
           width={0}
           height={0}

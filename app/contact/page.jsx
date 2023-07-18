@@ -17,14 +17,14 @@ const Contact = () => {
   return (
     <div className='font-oswald bg-white'>
       {/* Hero */}
-      <div className='h-screen w-full'>
+      <div className='md:h-screen w-full'>
         <Image
           src='/imgs/contact-hero.jpg'
           width={0}
           height={0}
           sizes='100vw'
           alt='big family'
-          className='w-full h-full object-cover'
+          className='w-full h-full object-contain md:object-cover'
         />
       </div>
       {/* Contact Info. */}

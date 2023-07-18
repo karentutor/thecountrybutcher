@@ -2,19 +2,18 @@ import Image from 'next/image'
 
 const Services = () => {
   return (
-    <div className='bg-white w-full py-14 md:py-20 px-5'>
-      <div className='grid grid-cols-1 md:grid-cols-2 grid-rows-[1fr_180px_1fr_240px_200px] md:grid-rows-[200px_200px_200px] gap-4 max-w-7xl mx-auto'>
+    <div className='bg-white w-full py-14 md:py-20'>
+      <div className='grid grid-cols-1 md:grid-cols-2 grid-rows-[240px_220px_1fr_240px_250px] md:grid-rows-[200px_200px_200px] gap-4 max-w-7xl mx-auto px-5'>
         {/* 1 */}
         <div className='flex flex-col gap-4'>
           <h3 className='uppercase text-4xl md:text-5xl font-bold text-secondary'>
             Our Services
           </h3>
           <p className='text-lg text-gray-600'>
-            Meat Craft Butchery specializes in locally, and ethically raised
-            meat. We employ skilled experienced butchers and take great pride in
-            the cuts we offer daily. In addition to the amazing quality of meats
-            and knowledgeable staff we offer a variety of other valuable
-            services.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum
+            labore provident expedita ab qui incidunt veniam commodi fuga
+            quaerat explicabo id placeat inventore veritatis recusandae maiores
+            similique obcaecati, nulla rerum doloremque omnis.
           </p>
         </div>
         {/* 2 */}
@@ -23,9 +22,9 @@ const Services = () => {
             Custom Cutting
           </h4>
           <p className='text-lg text-gray-600'>
-            Any of our butchers will cut product to your liking, just ask ! To
-            avoid wait times give us a call at the shop to have it ready and
-            waiting when you arrive.
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis illum
+            quo qui tempore temporibus ducimus. Error saepe, numquam cumque
+            tempora eligendi odio asperiores voluptatum.
           </p>
         </div>
         {/* 3 */}
@@ -34,19 +33,18 @@ const Services = () => {
             Custom Orders
           </h4>
           <p className='text-lg text-gray-600'>
-            Don't see it in the case? We probably have it in the back cooler or
-            freezer, please ask. If we don't have what you need in stock we can
-            probably order it for you, talk to our knowledgeable butchers. Some
-            popular items we often carry but don't necessarily display are goat,
-            ox tail, chicken feet and other soup bones, liver, kidney just to
-            name a few.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti
+            incidunt autem nostrum, placeat quae dolor. Doloremque enim
+            reiciendis quia corrupti nam nostrum nobis eos obcaecati iusto
+            itaque neque, aliquam consequatur voluptates dolores nulla illum
+            doloribus laudantium repellat sapiente asperiores ad.
           </p>
         </div>
         <Image
           width={0}
           height={0}
           sizes='100vw'
-          src='/imgs/services.webp'
+          src='/imgs/services.jpg'
           alt='piece of meat'
           className='w-full h-full object-contain md:row-span-2'
         />
@@ -56,10 +54,11 @@ const Services = () => {
             Whole animal purchases
           </h4>
           <p className='text-lg text-gray-600'>
-            Hosting a pig roast, roasting a whole lamb or just want to fill up
-            the freezer? Our butchers can source you a beautiful local,
-            ethically raised animal in the approximate size you need. Call for
-            pricing.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem
+            repellat sed incidunt iure molestiae. Vel magni velit molestias,
+            doloribus consequuntur incidunt sed iure soluta sint, rerum numquam
+            eveniet laborum assumenda saepe exercitationem temporibus, possimus
+            vitae.
           </p>
         </div>
       </div>

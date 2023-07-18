@@ -31,9 +31,8 @@ const Hero = () => {
       </Swiper>
       <div className='absolute inset-0 z-10 bg-black/50'>
         <div className='flex flex-col items-center text-center justify-center gap-16 md:gap-24 tracking-widest h-full text-white max-w-6xl mx-auto px-5'>
-          <h1 className='text-4xl md:text-5xl lg:text-6xl font-bold leading-normal md:leading-[4rem] lg:!leading-[5rem]'>
-            CHECK OUT OUR ONLINE STORE FOR EASY ORDERING. MANY NEW PRODUCTS
-            ADDED!
+          <h1 className='text-4xl md:text-5xl lg:text-6xl font-bold uppercase leading-normal md:leading-[4rem] lg:!leading-[5rem]'>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
           </h1>
           <button className='uppercase px-10 py-4 text-2xl bg-primary-800 hover:bg-primary-900 transition w-fit text-white'>
             order now

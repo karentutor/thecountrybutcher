@@ -13,10 +13,7 @@ export const navLinks = [
   {
     id: 4,
     text: 'Shop',
-    subMenu: [
-      { id: 1, text: 'Product List', route: '/product-list' },
-      { id: 2, text: 'Shop Retail', route: '/shop-retail' },
-    ],
+    subMenu: [{ id: 1, text: 'Product List', route: '/product-list' }],
   },
 ]
 export const footerLinks = [
@@ -24,13 +21,12 @@ export const footerLinks = [
   { id: 2, text: 'Our Story', route: '/our-story' },
   { id: 3, text: 'Contact', route: '/contact' },
   { id: 4, text: 'Product List', route: '/product-list' },
-  { id: 5, text: 'Shop Retail', route: '/shop-retail' },
 ]
 export const slides = [
-  '/imgs/slide1.webp',
-  '/imgs/slide2.jpg',
-  '/imgs/slide3.webp',
-  '/imgs/slide5.webp',
+  '/imgs/hero1.jpg',
+  '/imgs/hero2.jpg',
+  '/imgs/hero3.jpg',
+  '/imgs/hero4.jpg',
 ]
 export const socialLinks = [
   {
@@ -60,31 +56,141 @@ export const testimonials = [
   {
     id: 1,
     quote:
-      '“Great meat no comparison to the super markets. Fair prices wide selection of beef poultry and pork, mostly frozen but some fresh.”',
+      '“Lorem ipsum dolor sit, amet consectetur adipisicing elit. Autem iste voluptate qui, fugit cupiditate optio eius quod accusamus minima pariatur!”',
     author: '- Dustin W.',
   },
   {
     id: 2,
     quote:
-      '“We have really enjoyed Gunter Bros. They have all beef pepperoni and sausages. The lamb is great. We had one goat processed here, it was fantastic.”',
+      '“Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt obcaecati quo magnam temporibus iure sequi dicta velit deserunt.”',
     author: '- Happy Customer',
   },
   {
     id: 3,
     quote:
-      "“I love buying my meat from Gunter Brothers. Not only is it always service with a smile, but it's meat I feel really good about. and the prices can't be beat. SO easy to order online and pick just what you want.”",
+      '“Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure ducimus repudiandae, officia amet voluptatem facilis accusamus in consectetur dolorem quos at iusto maxime dolor non.”',
     author: '- SueAnn D.',
   },
   {
     id: 4,
     quote:
-      "“Great selection of meats, cheese, pork rinds, pepperonis, sausages, you name it! Most delicious pork rinds we've ever had... bbq, regular, and dilly flavour! Yummmm!!! ?”",
+      '“Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum, molestias dolorem, iure possimus eum deleniti aperiam blanditiis, sunt quod cupiditate minus architecto tempora.”',
     author: '- April R.',
   },
   {
     id: 5,
     quote:
-      "“Great selection, good prices, knowledgeable staff - overall a great place to buy meat. In addition they do a lot of the processing for local farms, we got half a pig butchered there and it's been excellent as well. A hidden gem.”",
+      '“Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis, quia inventore. Fuga quam autem ipsum nihil cupiditate blanditiis laborum laboriosam.”',
     author: '- Daniel E.',
+  },
+]
+export const products = [
+  {
+    id: 1,
+    name: 'lorem ipsum fadud',
+    price: '$350.00',
+    img: '/imgs/product.jpg',
+    options: [
+      'Lorem ipsum dolor sit amet',
+      'Lorem ipsum dolor sit amet',
+      'Lorem ipsum dolor sit amet',
+      'Lorem ipsum dolor sit amet',
+    ],
+  },
+  {
+    id: 2,
+    name: 'lorem ipsum fadud',
+    price: '$350.00',
+    img: '/imgs/product.jpg',
+    options: [
+      'Lorem ipsum dolor sit amet',
+      'Lorem ipsum dolor sit amet',
+      'Lorem ipsum dolor sit amet',
+      'Lorem ipsum dolor sit amet',
+    ],
+  },
+  {
+    id: 3,
+    name: 'lorem ipsum fadud',
+    price: '$350.00',
+    img: '/imgs/product.jpg',
+    options: [
+      'Lorem ipsum dolor sit amet',
+      'Lorem ipsum dolor sit amet',
+      'Lorem ipsum dolor sit amet',
+      'Lorem ipsum dolor sit amet',
+    ],
+  },
+  {
+    id: 4,
+    name: 'lorem ipsum fadud',
+    price: '$350.00',
+    img: '/imgs/product.jpg',
+    options: [
+      'Lorem ipsum dolor sit amet',
+      'Lorem ipsum dolor sit amet',
+      'Lorem ipsum dolor sit amet',
+      'Lorem ipsum dolor sit amet',
+    ],
+  },
+  {
+    id: 5,
+    name: 'lorem ipsum fadud',
+    price: '$350.00',
+    img: '/imgs/product.jpg',
+    options: [
+      'Lorem ipsum dolor sit amet',
+      'Lorem ipsum dolor sit amet',
+      'Lorem ipsum dolor sit amet',
+      'Lorem ipsum dolor sit amet',
+    ],
+  },
+  {
+    id: 6,
+    name: 'lorem ipsum fadud',
+    price: '$350.00',
+    img: '/imgs/product.jpg',
+    options: [
+      'Lorem ipsum dolor sit amet',
+      'Lorem ipsum dolor sit amet',
+      'Lorem ipsum dolor sit amet',
+      'Lorem ipsum dolor sit amet',
+    ],
+  },
+  {
+    id: 7,
+    name: 'lorem ipsum fadud',
+    price: '$350.00',
+    img: '/imgs/product.jpg',
+    options: [
+      'Lorem ipsum dolor sit amet',
+      'Lorem ipsum dolor sit amet',
+      'Lorem ipsum dolor sit amet',
+      'Lorem ipsum dolor sit amet',
+    ],
+  },
+  {
+    id: 8,
+    name: 'lorem ipsum fadud',
+    price: '$350.00',
+    img: '/imgs/product.jpg',
+    options: [
+      'Lorem ipsum dolor sit amet',
+      'Lorem ipsum dolor sit amet',
+      'Lorem ipsum dolor sit amet',
+      'Lorem ipsum dolor sit amet',
+    ],
+  },
+  {
+    id: 9,
+    name: 'lorem ipsum fadud',
+    price: '$350.00',
+    img: '/imgs/product.jpg',
+    options: [
+      'Lorem ipsum dolor sit amet',
+      'Lorem ipsum dolor sit amet',
+      'Lorem ipsum dolor sit amet',
+      'Lorem ipsum dolor sit amet',
+    ],
   },
 ]
