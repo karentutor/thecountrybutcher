@@ -1,9 +1,10 @@
+import Map from '@/components/Map'
 import { products } from '@/data'
 import Image from 'next/image'
 
 const ProductList = () => {
   return (
-    <div>
+    <>
       {/* Hero */}
       <div className='flex max-w-7xl mx-auto w-full flex-col items-center lg:flex-row gap-8 pb-10 pt-28 px-5'>
         {/* Image */}
@@ -80,7 +81,8 @@ const ProductList = () => {
           </div>
         </div>
       </div>
-    </div>
+      <Map />
+    </>
   )
 }
 

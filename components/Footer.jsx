@@ -1,7 +1,7 @@
-import { footerLinks, navLinks, socialLinks } from '@/data'
+import { footerLinks, socialLinks } from '@/data'
 import Image from 'next/image'
 import Link from 'next/link'
-import { FaMailBulk, FaMap, FaPhone } from 'react-icons/fa'
+import { FaMailBulk, FaMap, FaWhatsapp } from 'react-icons/fa'
 
 const Footer = () => {
   return (
@@ -65,7 +65,7 @@ const Footer = () => {
             rel='noreferrer'
             className='flex items-center gap-2 hover:text-white'
           >
-            <FaPhone className='text-xl' />
+            <FaWhatsapp className='text-xl' />
             +1 757-468-1583
           </a>
           <div className='flex justify-between gap-6 md:gap-10 max-w-[275px] md:max-w-[375px] mt-4'>

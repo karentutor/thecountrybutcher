@@ -11,9 +11,14 @@ export const navLinks = [
     ],
   },
   {
+    id: 3,
+    text: 'Our Products',
+    route: '/product-list',
+  },
+  {
     id: 4,
-    text: 'Shop',
-    subMenu: [{ id: 1, text: 'Product List', route: '/product-list' }],
+    text: 'Specials',
+    route: '/specials',
   },
 ]
 export const footerLinks = [
@@ -27,6 +32,18 @@ export const slides = [
   '/imgs/hero2.jpg',
   '/imgs/hero3.jpg',
   '/imgs/hero4.jpg',
+]
+export const specialSlides = [
+  '/imgs/specials-hero.webp',
+  '/imgs/specials-hero2.webp',
+  '/imgs/specials-hero3.webp',
+  '/imgs/specials-hero4.webp',
+]
+export const featured = [
+  { id: 1, img: '/imgs/featured1.webp', title: 'SUBSCRIBE AND SIMPLIFY' },
+  { id: 2, img: '/imgs/featured2.webp', title: 'DRY AGED BURGERS' },
+  { id: 3, img: '/imgs/featured3.webp', title: 'GRILL GO-TOS' },
+  { id: 4, img: '/imgs/featured4.webp', title: 'CUTS FOR THE CROWD' },
 ]
 export const socialLinks = [
   {
@@ -192,5 +209,31 @@ export const products = [
       'Lorem ipsum dolor sit amet',
       'Lorem ipsum dolor sit amet',
     ],
+  },
+]
+export const specialProducts = [
+  {
+    id: 1,
+    name: 'NY STRIP STEAK',
+    price: '$31',
+    img: '/imgs/special1.webp',
+  },
+  {
+    id: 2,
+    name: 'FILET MIGNON',
+    price: '$29',
+    img: '/imgs/special2.webp',
+  },
+  {
+    id: 3,
+    name: 'SIRLOIN FILET',
+    price: '$14',
+    img: '/imgs/special3.webp',
+  },
+  {
+    id: 4,
+    name: 'TRI-TIP',
+    price: '$50',
+    img: '/imgs/special4.webp',
   },
 ]

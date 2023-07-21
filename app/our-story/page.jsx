@@ -1,3 +1,4 @@
+import Map from '@/components/Map'
 import Image from 'next/image'
 
 const OurStory = () => {
@@ -169,6 +170,7 @@ const OurStory = () => {
           </div>
         </div>
       </div>
+      <Map />
     </div>
   )
 }
