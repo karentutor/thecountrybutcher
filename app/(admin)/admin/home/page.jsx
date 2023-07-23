@@ -1,4 +1,4 @@
-import StatisticCard from './components/StatisticCard'
+import StatisticCard from '../components/StatisticCard'
 import { FaShoppingCart, FaStar } from 'react-icons/fa'
 
 const Home = () => {

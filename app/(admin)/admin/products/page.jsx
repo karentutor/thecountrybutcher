@@ -15,6 +15,8 @@ const Products = () => {
   const [products, setProducts] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [modalOn, setModalOn] = useState(false)
+  const [detailsOn, setDetailsOn] = useState(false)
+  const [product, setProduct] = useState({})
 
   const getProducts = () => {
     setIsLoading(true)
@@ -77,8 +79,16 @@ const Products = () => {
     setModalOn(false)
     reset()
   }
+  const openDetails = () => setDetailsOn(true)
 
-  const handleClose = (e) => e.target.id === 'container' && closeModal()
+  const closeDetails = () => setDetailsOn(false)
+
+  const handleClose = (e) => {
+    if (e.target.id === 'container') {
+      closeModal()
+      closeDetails()
+    }
+  }
 
   return (
     <>
@@ -94,9 +104,15 @@ const Products = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        <div className='max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 py-6 px-5'>
+        <div className='max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 place-items-center gap-4 py-6'>
           {products.map((product) => (
-            <ProductCard product={product} key={product.id} />
+            <ProductCard
+              product={product}
+              key={product.id}
+              getProducts={getProducts}
+              setProduct={setProduct}
+              setDetailsOn={setDetailsOn}
+            />
           ))}
         </div>
       )}
@@ -116,7 +132,7 @@ const Products = () => {
               </button>
             </div>
             <form
-              className='flex flex-col w-full gap-4 p-4'
+              className='flex flex-col w-full gap-2 px-4'
               onSubmit={handleSubmit(onSubmit)}
             >
               <div className='flex flex-col gap-1'>
@@ -247,10 +263,85 @@ const Products = () => {
               <div className='flex items-center gap-4'>
                 <button
                   type='submit'
+                  disabled={isLoading}
                   className='bg-primary-800 hover:bg-primary-900 transition text-white py-2 my-6 px-8 rounded-lg'
                 >
                   Create Product
                 </button>
+                <button
+                  type='button'
+                  disabled={isLoading}
+                  onClick={closeModal}
+                  className='bg-gray-300 hover:bg-gray-400 transition py-2 my-6 px-8 rounded-lg'
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      ) : null}
+      {detailsOn ? (
+        <div
+          className='absolute inset-0 flex items-center justify-center bg-black/50'
+          id='container'
+          onClick={handleClose}
+        >
+          <div className='max-w-2xl mx-auto max-h-[90vh] overflow-y-auto w-full bg-white rounded-2xl no-scrollbar'>
+            <div className='flex items-center justify-between w-full mb-2 sticky top-0 bg-white p-4 shadow-md'>
+              <h3 className='text-lg md:text-xl lg:text-2xl font-bold'>
+                Product Details
+              </h3>
+              <button onClick={closeDetails}>
+                <BsX className='bg-red-500 text-white p-1 rounded-full text-3xl md:text-4xl' />
+              </button>
+            </div>
+            <form className='flex flex-col w-full gap-2 px-4'>
+              <div className='flex flex-col gap-1'>
+                <label htmlFor='title'>title</label>
+                <input
+                  type='text'
+                  id='title'
+                  readOnly
+                  value={product?.title}
+                  className='w-full border py-2 px-4 outline-none rounded-lg border-gray-400'
+                />
+              </div>
+              <div className='flex flex-col gap-1 w-full'>
+                <label htmlFor='price '>price</label>
+                <input
+                  type='number'
+                  id='price'
+                  readOnly
+                  value={product?.price}
+                  className='w-full border py-2 px-4 outline-none rounded-lg border-gray-400'
+                />
+              </div>
+              <div className='flex flex-col gap-1'>
+                <label htmlFor='description'>description</label>
+                <textarea
+                  type='text'
+                  id='description'
+                  readOnly
+                  value={product?.description}
+                  className='w-full border py-2 px-4 outline-none rounded-lg border-gray-400'
+                  rows={3}
+                />
+              </div>
+              <div className='flex flex-col gap-1 w-full'>
+                <label htmlFor='img'>image</label>
+                <div className='flex items-center gap-4'>
+                  <div className='relative w-[200px] h-[200px] rounded-md overflow-hidden'>
+                    <Image
+                      fill
+                      className='object-cover'
+                      alt='Image'
+                      src={product?.imageUrl}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className='flex items-center gap-4'>
                 <button
                   type='button'
                   onClick={closeModal}
