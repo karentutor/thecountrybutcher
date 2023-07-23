@@ -1,4 +1,10 @@
-import { FaFacebook, FaInstagram } from 'react-icons/fa'
+import {
+  FaFacebook,
+  FaHome,
+  FaInstagram,
+  FaStar,
+  FaShoppingCart,
+} from 'react-icons/fa'
 
 export const navLinks = [
   { id: 1, text: 'Home', route: '/' },
@@ -235,5 +241,25 @@ export const specialProducts = [
     name: 'TRI-TIP',
     price: '$50',
     img: '/imgs/special4.webp',
+  },
+]
+export const sidebarLinks = [
+  {
+    id: 1,
+    name: 'Home',
+    icon: FaHome,
+    route: '/admin/home',
+  },
+  {
+    id: 2,
+    name: 'Products',
+    icon: FaShoppingCart,
+    route: '/admin/products',
+  },
+  {
+    id: 3,
+    name: 'Specials',
+    icon: FaStar,
+    route: '/admin/specials',
   },
 ]

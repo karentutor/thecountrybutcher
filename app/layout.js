@@ -1,9 +1,8 @@
-import Navbar from '@/components/Navbar'
-import './globals.css'
 import { Oswald, Cormorant_Garamond } from 'next/font/google'
-import Footer from '@/components/Footer'
-import Map from '@/components/Map'
-import ScrollToTop from '@/components/ScrollToTop'
+
+import { AuthProvider } from '@/context'
+
+import './globals.css'
 
 const oswald = Oswald({ subsets: ['latin'], variable: '--font-oswald' })
 const cormorant = Cormorant_Garamond({
@@ -23,10 +22,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${oswald.variable} ${cormorant.variable} font-oswald bg-secondary`}
       >
-        <Navbar />
-        {children}
-        <ScrollToTop />
-        <Footer />
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   )
