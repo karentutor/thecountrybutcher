@@ -8,7 +8,9 @@ export const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState(
-    JSON.parse(localStorage.getItem('user')) || {}
+    typeof window !== 'undefined'
+      ? JSON.parse(localStorage.getItem('user'))
+      : {}
   )
 
   const queryClient = new QueryClient()
