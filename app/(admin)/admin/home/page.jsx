@@ -1,7 +1,24 @@
+'use client'
+
+import { useQuery } from '@tanstack/react-query'
 import StatisticCard from '../components/StatisticCard'
 import { FaShoppingCart, FaStar } from 'react-icons/fa'
+import axios from 'axios'
+import Loader from '@/components/Loader'
+import Error from '@/components/Error'
 
 const Home = () => {
+  const getProducts = () => axios.get('/api/products')
+
+  const productsQuery = useQuery({
+    queryKey: ['products'],
+    queryFn: getProducts,
+  })
+
+  if (productsQuery.isLoading) return <Loader />
+
+  if (productsQuery.isError) return <Error />
+
   return (
     <div>
       <h1 className='text-2xl lg:text-3xl font-bold my-4'>Home</h1>
@@ -11,14 +28,14 @@ const Home = () => {
             icon={
               <FaShoppingCart className='p-1.5 text-6xl text-white rounded-lg bg-primary-900' />
             }
-            number={5}
+            number={productsQuery.data?.data?.length}
             title='Num. of Products'
           />
           <StatisticCard
             icon={
               <FaStar className=' p-1.5 text-6xl text-white rounded-lg bg-primary-900' />
             }
-            number={3}
+            number={productsQuery.data?.data?.filter((p) => p.special)?.length}
             title='Num. of Specials'
           />
         </div>

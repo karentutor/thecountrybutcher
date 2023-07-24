@@ -18,4 +18,5 @@ model Product {
   description String   @db.VarChar(300)
   price       Int
   imageUrl    String
+  special     Boolean  @default(false)
 }

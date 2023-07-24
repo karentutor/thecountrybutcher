@@ -5,7 +5,7 @@ export async function POST(req) {
   try {
     const body = await req.json()
 
-    const { title, description, imageUrl, price } = body
+    const { title, description, imageUrl, price, special } = body
 
     if (!title && !description && !imageUrl && !price) {
       return new NextResponse('Something is Missing', { status: 400 })
@@ -27,6 +27,7 @@ export async function POST(req) {
         description,
         imageUrl,
         price,
+        special,
       },
     })
 
