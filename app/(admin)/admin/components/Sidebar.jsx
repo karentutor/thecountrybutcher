@@ -1,20 +1,23 @@
 'use client'
 
 import { FaSignOutAlt } from 'react-icons/fa'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
+import { deleteCookie } from 'cookies-next'
 
 import { sidebarLinks } from '@/data'
 import useAuth from '@/hooks/useAuth'
 
 const Sidebar = () => {
   const pathname = usePathname()
+  const router = useRouter()
   const { setAuth } = useAuth()
 
   const logout = () => {
     console.log('logout')
-    localStorage.removeItem('user')
+    deleteCookie('user')
+    router.replace('/login')
     setAuth({})
   }
 

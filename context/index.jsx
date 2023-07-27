@@ -3,15 +3,17 @@
 import { createContext, useState } from 'react'
 import { Toaster } from 'react-hot-toast'
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
+import { getCookie } from 'cookies-next'
 
 export const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState(
-    typeof window !== 'undefined'
-      ? JSON.parse(localStorage.getItem('user'))
-      : {}
+    getCookie('user') ? JSON.parse(getCookie('user')) : {}
   )
+  // typeof window !== 'undefined'
+  //   ? JSON.parse(localStorage.getItem('user'))
+  //   : {}
 
   const queryClient = new QueryClient()
 

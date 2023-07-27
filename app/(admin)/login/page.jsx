@@ -6,6 +6,7 @@ import { toast } from 'react-hot-toast'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
+import { setCookie } from 'cookies-next'
 
 import useAuth from '@/hooks/useAuth'
 
@@ -30,7 +31,7 @@ const Login = () => {
 
     if (data.email === 'admin@gmail.com' && data.password === 'admin') {
       setAuth(data)
-      localStorage.setItem('user', JSON.stringify(data))
+      setCookie('user', JSON.stringify(data), { maxAge: 60 * 6 * 24 })
       router.push('/admin/home')
       toast.success(`Welcome ${data.email.split('@')[0]}`)
       reset()
