@@ -45,7 +45,7 @@ const ProductCard = (props) => {
   }
 
   return (
-    <div className='max-w-[280px] md:max-w-xs border bg-white border-gray-200 min-w-[280px] md:min-w-[320px] hover:shadow-lg transition duration-150 ease-in-out rounded-lg border-solid max-h-[420px]'>
+    <div className='max-w-[280px] md:max-w-xs border bg-white border-gray-200 min-w-[280px] md:min-w-[320px] hover:shadow-lg transition duration-150 ease-in-out rounded-lg border-solid max-h-[450px]'>
       <div className='rounded-tl-lg relative rounded-tr-lg overflow-hidden h-[250px]'>
         <Image
           src={product?.imageUrl}
@@ -55,12 +55,11 @@ const ProductCard = (props) => {
           sizes='100vw'
           className='w-full h-full object-cover'
         />
-        <span className='border absolute top-4 right-2 border-gray-400 rounded-full bg-white px-4 py-1 text-sm'>
-          price:{' '}
-          <span className='text-primary-900 uppercase'>{product?.price}$</span>
+        <span className='text-primary-900 uppercase border absolute top-4 right-2 border-gray-400 rounded-full bg-white px-2 py-1 text-lg font-bold'>
+          ${product?.price}
         </span>
       </div>
-      <div className='p-3 flex flex-col gap-4 h-full'>
+      <div className='p-3 flex flex-col gap-4 h-[200px]'>
         <div className='flex justify-between items-center text-xs'>
           <span className='text-primary-900 font-semibold'>
             <span className=' text-gray-500'>Created At: </span>

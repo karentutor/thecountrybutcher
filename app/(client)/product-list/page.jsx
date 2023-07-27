@@ -1,8 +1,18 @@
-import Map from '@/components/Map'
-import { products } from '@/data'
+'use client'
+
+import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
+import axios from 'axios'
+
+import Loader from '@/components/Loader'
+import Map from '@/components/Map'
 
 const ProductList = () => {
+  const { data: products, isLoading } = useQuery({
+    queryKey: ['getProducts'],
+    queryFn: () => axios.get('/api/products'),
+  })
+
   return (
     <>
       {/* Hero */}
@@ -54,31 +64,37 @@ const ProductList = () => {
             </p>
           </div>
           {/* Products */}
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12'>
-            {products.map((product) => (
-              <div className='flex flex-col gap-3 w-fit' key={product.id}>
-                <div className='space-y-2'>
-                  <h3 className='text-2xl md:text-3xl font-bold uppercase text-secondary'>
-                    {product.name}
-                  </h3>
-                  <p>{product.price}</p>
+          {isLoading ? (
+            <Loader fullPage={false} />
+          ) : (
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10'>
+              {products?.data?.map((product) => (
+                <div className='flex flex-col gap-3 w-fit' key={product?.id}>
+                  <div className='space-y-2'>
+                    <h3 className='text-2xl md:text-3xl font-bold uppercase text-secondary'>
+                      {product?.title}
+                    </h3>
+                    <p>${product?.price}</p>
+                  </div>
+                  <div className=''>
+                    <Image
+                      src={product?.imageUrl}
+                      alt={product?.title}
+                      width={0}
+                      height={0}
+                      sizes='100vw'
+                      className='object-cover h-[384px] w-full'
+                    />
+                  </div>
+                  <p className='text-lg text-gray-600'>
+                    {product?.description?.length > 100
+                      ? `${product?.description?.slice(0, 100)}...`
+                      : product?.description}
+                  </p>
                 </div>
-                <Image
-                  src={product.img}
-                  alt={product.name}
-                  width={384}
-                  height={320}
-                  className='object-cover'
-                />
-                <ul className='list-disc list-inside flex flex-col gap-1 text-gray-600 text-lg'>
-                  Includes:
-                  {product.options.map((option, i) => (
-                    <li key={i}>{option}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
       <Map />
