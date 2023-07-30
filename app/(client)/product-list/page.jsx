@@ -32,35 +32,36 @@ const ProductList = () => {
         <div className='flex-1 font-cormorant'>
           <div className='px-6 md:px-10 py-8 flex flex-col items-center justify-center text-center gap-4 md:gap-6 bg-white h-fit'>
             <h3 className='uppercase text-4xl md:text-5xl text-secondary font-bold font-oswald leading-relaxed md:!leading-[4rem]'>
-              Ready products
+              OVEN Ready products
             </h3>
-            <p className='text-3xl text-primary-900 font-bold underline'>
-              Lorem ipsum dolor sit.
+            <p className='text-xl text-gray-600 font-bold'>
+              We have a range of oven ready products such as meatballs, our home
+              made pork and beef meatballs smothered in our home made meat sauce
+              and topped off with our three cheese mix.
             </p>
             <p className='text-xl text-gray-600 font-bold'>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore
-              sunt voluptatem dignissimos dolore, unde eius autem, sed harum cum
-              dolorem odit alias corporis delectus reiciendis odio ullam
-              deleniti consequatur dolores vitae ipsam. Cupiditate obcaecati
-              nihil reiciendis deserunt necessitatibus quisquam, placeat,
-              consectetur earum, consequatur hic sed?
+              We also have freshly made chicken cordon blue – swiss cheese and
+              black forest ham stuffed inside our local chicken breast wrapped
+              in our old-style hickory smoked bacon.
             </p>
-            <button className='bg-primary-900 font-oswald px-12 py-4 mt-4 text-xl tracking-widest text-white uppercase w-fit'>
+            <a
+              href='#products'
+              className='bg-primary-900 font-oswald px-12 py-4 mt-4 text-xl tracking-widest text-white uppercase w-fit'
+            >
               View Products
-            </button>
+            </a>
           </div>
         </div>
       </div>
       {/* Products section */}
-      <div className='bg-white px-5 py-12 md:py-16'>
+      <div className='bg-white px-5 py-12 md:py-16' id='products'>
         <div className='max-w-7xl mx-auto space-y-16'>
           <div className='flex flex-col gap-8'>
             <h1 className='uppercase font-bold text-3xl md:text-4xl lg:text-5xl text-secondary'>
-              shop online
+              OUR PRODUCTS
             </h1>
             <p className='text-xl text-primary-900'>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos
-              soluta quo velit!
+              Many more products available in store!
             </p>
           </div>
           {/* Products */}

@@ -20,14 +20,14 @@ const Specials = () => {
     <div>
       <Hero
         title="“IF IT'S NOT RAISED RIGHT IT CAN'T BE DELICIOUS.”"
-        subtitle='NO HORMONES - NO ANTIBIOTICS - PASTURE-RAISED'
+        title2='NO HORMONES - NO ANTIBIOTICS - PASTURE-RAISED'
         slides={specialSlides}
         btnText='Start shoping'
         btnUrl='/product-list'
       />
       <Banner
         title='NOW DELIVERING MEAT THE WAY MEAT SHOULD BE'
-        description='By sourcing from pastures in Kentucky and Tennessee, and dry aging and hand-cutting it at our own facilities, we’re setting a new standard for meat. After years of serving our local community, we’re now delivering nationwide. Once you taste the difference, you’ll never go back.'
+        description='By sourcing from pastures in Vancouver Island and Triple A Alberta Beef and dry aging and hand-cutting it at our own facilities, we’re setting a new standard for meat. Once you taste the difference, you’ll never go back.'
       />
       <Featured />
       {/* DIG IN */}
@@ -49,12 +49,6 @@ const Specials = () => {
               tons of incredible cuts and can guide you toward the perfect one
               for any occasion.
             </p>
-            <Link
-              href='/about'
-              className='underline decoration-primary-900 decoration-2 underline-offset-4 text-lg md:text-xl tracking-widest uppercase font-semibold text-secondary'
-            >
-              LEARN MORE ABOUT OUR PHILOSOPHY
-            </Link>
           </div>
         </div>
       </div>

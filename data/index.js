@@ -8,21 +8,16 @@ import {
 
 export const navLinks = [
   { id: 1, text: 'Home', route: '/' },
+
+  { id: 2, text: 'Our Story', route: '/our-story' },
+  { id: 3, text: 'Contact Us', route: '/contact' },
   {
-    id: 2,
-    text: 'About Us',
-    subMenu: [
-      { id: 1, text: 'Our Story', route: '/our-story' },
-      { id: 2, text: 'Contact', route: '/contact' },
-    ],
-  },
-  {
-    id: 3,
+    id: 4,
     text: 'Our Products',
     route: '/product-list',
   },
   {
-    id: 4,
+    id: 5,
     text: 'Specials',
     route: '/specials',
   },

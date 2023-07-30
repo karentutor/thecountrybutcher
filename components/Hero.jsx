@@ -7,7 +7,7 @@ import Link from 'next/link'
 
 import 'swiper/css'
 
-const Hero = ({ slides, title, subtitle, btnText, btnUrl = '/' }) => {
+const Hero = ({ slides, title, title2, subtitle, btnText, btnUrl = '/' }) => {
   return (
     <>
       <Swiper
@@ -30,10 +30,11 @@ const Hero = ({ slides, title, subtitle, btnText, btnUrl = '/' }) => {
         ))}
       </Swiper>
       <div className='absolute inset-0 z-10 bg-black/30'>
-        <div className='flex flex-col items-center text-center justify-center gap-4 md:gap-10 tracking-widest h-full text-white max-w-6xl mx-auto px-5'>
-          <h1 className='text-4xl md:text-6xl lg:text-8xl font-bold uppercase leading-normal md:leading-[4rem] lg:!leading-[7rem]'>
+        <div className='flex flex-col items-center text-center justify-center gap-2 md:gap-10 tracking-widest h-full text-white max-w-7xl mx-auto'>
+          <h1 className='text-4xl md:text-6xl xl:text-8xl font-bold uppercase leading-normal md:leading-[4rem] lg:!leading-[6.5rem]'>
             {title}
           </h1>
+          <h2 className='text-2xl md:text-4xl font-bold uppercase'>{title2}</h2>
           <p className='uppercase text-base md:text-lg text-gray-300'>
             {subtitle}
           </p>

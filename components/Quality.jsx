@@ -4,20 +4,26 @@ const Quality = () => {
   return (
     <div className='flex max-w-7xl mx-auto w-full flex-col md:flex-row py-14 md:py-20 px-5'>
       {/* Content */}
-      <div className='flex-1 px-6 md:px-10 py-10 md:py-24 flex flex-col gap-4 md:gap-8 bg-white font-cormorant'>
-        <h3 className='uppercase text-4xl text-secondary font-bold font-oswald leading-relaxed md:!leading-[4rem]'>
-          Lorem ipsum dolor sit amet.
-        </h3>
+      <div className='flex-1 px-6 md:px-10 py-10 md:py-16 flex flex-col gap-4 md:gap-8 bg-white font-cormorant'>
+        <div className='font-oswald'>
+          <h3 className='uppercase text-4xl text-primary-900 font-bold leading-relaxed'>
+            OLD ....
+          </h3>
+          <h3 className='uppercase text-3xl text-secondary font-bold leading-relaxed'>
+            FASHIONED BUTCHERY WITH A{' '}
+            <span className='text-primary-900'>MODERN</span> TWIST
+          </h3>
+        </div>
         <p className='text-2xl text-gray-600 font-bold'>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis
-          eius quibusdam modi dolor adipisci sapiente?
+          The Country Butcher – we are a traditional butcher shop that
+          specializes in high-quality meats and meat products. We source our
+          meats from local farms or ranches when available.
         </p>
         <p className='text-2xl text-gray-600 font-bold'>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure est vel
-          consequuntur mollitia beatae amet odit suscipit repudiandae sit
-          voluptatibus molestiae nam, cum illo quod? Quos ex nulla consectetur,
-          dolor inventore, ut quod tempora recusandae molestias asperiores eos
-          maxime nostrum.
+          We pride themselves on offering a wide variety of fresh meats,
+          including Beef, Pork, Lamb and Poultry. In addition, we make all our
+          pepperoni, smoked bacon, artisan sausage in house using old-style
+          traditional methods in a modern facility.
         </p>
       </div>
       {/* Image */}
