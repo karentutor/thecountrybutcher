@@ -9,18 +9,19 @@ import {
 export const navLinks = [
   { id: 1, text: 'Home', route: '/' },
 
-  { id: 2, text: 'Our Story', route: '/our-story' },
-  { id: 3, text: 'Contact Us', route: '/contact' },
+  // { id: 2, text: 'Our Story', route: '/our-story' },
   {
-    id: 4,
-    text: 'Our Products',
+    id: 2,
+    text: 'Products',
     route: '/product-list',
   },
   {
-    id: 5,
+    id: 3,
     text: 'Specials',
     route: '/specials',
   },
+  { id: 4, text: 'Contact', route: '/contact' },
+
 ]
 export const footerLinks = [
   { id: 1, text: 'Home', route: '/' },
