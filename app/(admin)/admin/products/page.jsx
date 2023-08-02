@@ -6,10 +6,10 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { CldUploadWidget } from 'next-cloudinary'
 import { BsImageAlt, BsTrash, BsX } from 'react-icons/bs'
+import { toast } from 'react-hot-toast'
 
 import ProductCard from '../components/ProductCard'
 import Loader from '@/components/Loader'
-import { toast } from 'react-hot-toast'
 
 const Products = () => {
   const [products, setProducts] = useState([])

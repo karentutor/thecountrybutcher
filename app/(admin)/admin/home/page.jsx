@@ -1,11 +1,12 @@
 'use client'
 
-import { useQuery } from '@tanstack/react-query'
-import StatisticCard from '../components/StatisticCard'
-import { FaShoppingCart, FaStar } from 'react-icons/fa'
 import axios from 'axios'
+import { useQuery } from '@tanstack/react-query'
+import { FaShoppingCart, FaStar } from 'react-icons/fa'
+
 import Loader from '@/components/Loader'
 import Error from '@/components/Error'
+import StatisticCard from '../components/StatisticCard'
 
 const Home = () => {
   const getProducts = () => axios.get('/api/products')
@@ -40,39 +41,6 @@ const Home = () => {
           />
         </div>
       </div>
-
-      {/* <div className='flex flex-col gap-4 my-10'>
-        <h3 className='text-xl lg:text-2xl font-bold'>أحدث المسجلين</h3>
-        <div className='overflow-y-auto no-scrollbar'>
-          <table className='table-auto w-[1000px] lg:w-full bg-primary-900 rounded-xl overflow-hidden'>
-            <thead>
-              <tr className='border-b text-white'>
-                {studentsHead.map((item, i) => (
-                  <th className='p-4 text-center font-normal' key={i}>
-                    {item}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {students
-                ?.sort((a, b) => a.id - b.id)
-                .map((stu) => (
-                  <tr
-                    className='text-center even:bg-white odd:bg-gray-100'
-                    key={stu.id}
-                  >
-                    <td className='p-4'>{stu.fullName}</td>
-                    <td>{stu.natID}</td>
-                    <td>{stu.jobID}</td>
-                    <td>{stu.mobileNumber}</td>
-                    <td>{stu.branch || ''}</td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        </div>
-      </div> */}
     </div>
   )
 }

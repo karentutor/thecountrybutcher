@@ -1,4 +1,4 @@
-import { footerLinks, socialLinks } from '@/data'
+import { navLinks, socialLinks } from '@/data'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FaMailBulk, FaMap, FaWhatsapp } from 'react-icons/fa'
@@ -24,7 +24,7 @@ const Footer = () => {
         </Link>
         <div>
           <ul className='flex flex-col items-center justify-center md:items-start gap-4 my-6'>
-            {footerLinks.map((link) => (
+            {navLinks.map((link) => (
               <li key={link.id}>
                 <Link
                   href={link.route}
@@ -35,6 +35,14 @@ const Footer = () => {
                 </Link>
               </li>
             ))}
+            <li>
+              <Link
+                href='/admin/home'
+                className='text-primary-800 hover:text-primary-900 text-lg md:text-xl transition'
+              >
+                Admin
+              </Link>
+            </li>
           </ul>
         </div>
         <div
@@ -86,7 +94,8 @@ const Footer = () => {
       </div>
       <p className='border-t-2 text-sm border-[#D9D9D91C] text-center pt-4 text-white'>
         All Rights Reserved &copy;{' '}
-        <span className='text-gold-900'>The Country Butcher</span> 2023
+        <span className='text-gold-900'>The Country Butcher</span>{' '}
+        {new Date().getFullYear()}
       </p>
     </div>
   )

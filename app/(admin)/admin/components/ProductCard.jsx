@@ -45,7 +45,7 @@ const ProductCard = (props) => {
   }
 
   return (
-    <div className='max-w-[280px] md:max-w-xs border bg-white border-gray-200 min-w-[280px] md:min-w-[320px] hover:shadow-lg transition duration-150 ease-in-out rounded-lg border-solid max-h-[450px]'>
+    <div className='max-w-[280px] md:max-w-xs border bg-white border-gray-200 min-w-[280px] md:min-w-[320px] hover:shadow-lg transition duration-150 ease-in-out rounded-lg border-solid h-[450px] max-h-[450px]'>
       <div className='rounded-tl-lg relative rounded-tr-lg overflow-hidden h-[250px]'>
         <Image
           src={product?.imageUrl}

@@ -30,9 +30,9 @@ const Login = () => {
     console.log(data)
 
     if (data.email === 'admin@gmail.com' && data.password === 'admin') {
+      router.push('/admin/home')
       setAuth(data)
       setCookie('user', JSON.stringify(data), { maxAge: 60 * 6 * 24 })
-      router.push('/admin/home')
       toast.success(`Welcome ${data.email.split('@')[0]}`)
       reset()
     } else {
@@ -41,34 +41,10 @@ const Login = () => {
     }
 
     setIsLoading(false)
-
-    // await axiosBase
-    //   .post('/Accounts/authenticate', data)
-    //   .then((res) => {
-    //     if (res.data.role === 'Admin') {
-    //       toast.error('لا يمكنك تسجيل الدخول بهذا الحساب', 5000)
-    //     } else {
-    // setAuth(res.data)
-    // secureLocalStorage.setItem('user', JSON.stringify(res.data))
-    // router.push('/')
-    // toast.success('تم تسجيل الدخول بنجاح')
-    // reset()
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.error(err)
-    //     if (err?.response?.status === 400) {
-    //       toast.error(err?.response?.data?.message)
-    //     } else {
-    //       toast.error('حدث خطأ, تأكد أن لديك حساب بالفعل')
-    //       reset()
-    //     }
-    //   })
-    //   .finally(() => setIsLoading(false))
   }
 
   return (
-    <div className='flex items-center justify-center min-h-screen w-full flex-col gap-8 bg-gray-200'>
+    <div className='flex items-center justify-center min-h-screen w-full flex-col gap-8 px-4 lg:px-0 bg-gray-200'>
       {/* HEADING */}
       <div className='flex items-center justify-center text-center flex-col gap-4'>
         <Link href='/'>
@@ -80,7 +56,7 @@ const Login = () => {
       </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className='px-6 py-8 rounded-lg bg-white shadow-md max-w-md mx-auto w-full flex flex-col gap-6'
+        className='px-4 md:px-6 py-8 rounded-lg bg-white shadow-md max-w-md mx-auto w-full flex flex-col gap-6'
       >
         <div className='flex flex-col gap-1'>
           <label htmlFor='email'>Email</label>

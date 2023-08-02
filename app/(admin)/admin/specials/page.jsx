@@ -1,6 +1,5 @@
 'use client'
 
-import Loader from '@/components/Loader'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
 import Image from 'next/image'
@@ -8,6 +7,8 @@ import { useState } from 'react'
 import { BsX } from 'react-icons/bs'
 import moment from 'moment'
 import { toast } from 'react-hot-toast'
+
+import Loader from '@/components/Loader'
 
 const Specials = () => {
   const [detailsOn, setDetailsOn] = useState(false)
@@ -69,7 +70,7 @@ const Specials = () => {
             data?.data?.map((product) => (
               <div
                 key={product.id}
-                className='max-w-[280px] md:max-w-xs border bg-white border-gray-200 min-w-[280px] md:min-w-[320px] hover:shadow-lg transition duration-150 ease-in-out rounded-lg border-solid max-h-[420px]'
+                className='max-w-[280px] md:max-w-xs border bg-white border-gray-200 min-w-[280px] md:min-w-[320px] hover:shadow-lg transition duration-150 ease-in-out rounded-lg border-solid h-[450px] max-h-[450px]'
               >
                 <div className='rounded-tl-lg relative rounded-tr-lg overflow-hidden h-[250px]'>
                   <Image
@@ -87,7 +88,7 @@ const Specials = () => {
                     </span>
                   </span>
                 </div>
-                <div className='p-3 flex flex-col gap-4 h-full'>
+                <div className='p-3 flex flex-col gap-4 h-[200px]'>
                   <div className='flex justify-between items-center text-xs'>
                     <span className='text-primary-900 font-semibold'>
                       <span className=' text-gray-500'>Created At: </span>

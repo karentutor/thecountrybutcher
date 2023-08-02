@@ -23,7 +23,7 @@ const Sidebar = () => {
 
   return (
     <div className='bg-white shadow-lg m-2 w-16 lg:w-[300px] flex flex-col py-4 gap-20 items-center rounded-lg '>
-      <Link href='/admin'>
+      <Link href='/admin/home'>
         <Image
           src='/logo.png'
           alt='logo'
