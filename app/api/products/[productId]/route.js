@@ -1,56 +1,70 @@
 import { NextResponse } from 'next/server'
 
-import client from '@/prisma/client'
+import Product from '@/models/product'
+import connectMongoDB from '@/libs/db'
 
-export async function PATCH(req, { params }) {
+export const PATCH = async (req, { params }) => {
   try {
     const body = await req.json()
 
+    const { productId } = params
     const { title, description, price, imageUrl, special } = body
 
-    if (!title || !description || !price || !imageUrl) {
-      return new NextResponse('Something is missing', { status: 400 })
-    }
-
-    if (!params.productId) {
+    if (!productId) {
       return new NextResponse('Product id is required', { status: 400 })
     }
 
-    const product = await client.product.updateMany({
-      where: {
-        id: params.productId,
-      },
-      data: {
-        title,
-        description,
-        imageUrl,
-        price,
-        special,
-      },
+    await Product.findByIdAndUpdate(productId, {
+      title,
+      description,
+      price,
+      imageUrl,
+      special,
     })
 
-    return NextResponse.json(product)
+    return NextResponse.json(
+      { message: 'product updated successfully' },
+      { status: 200 }
+    )
   } catch (error) {
     console.log('[PRODUCT_PATCH]', error)
     return new NextResponse('Internal error', { status: 500 })
   }
 }
 
-export async function DELETE(req, { params }) {
+export const DELETE = async (req, { params }) => {
   try {
-    if (!params.productId) {
+    const { productId } = params
+
+    await connectMongoDB()
+
+    if (!productId) {
       return new NextResponse('Product id is required', { status: 400 })
     }
 
-    const product = await client.product.deleteMany({
-      where: {
-        id: params.productId,
-      },
-    })
+    await Product.findByIdAndDelete(productId)
 
-    return NextResponse.json(product)
+    return NextResponse.json(
+      { message: 'product deleted successfully' },
+      { status: 200 }
+    )
   } catch (error) {
     console.log('[PRODUCT_DELETE]', error)
+    return new NextResponse('Internal error', { status: 500 })
+  }
+}
+
+export const GET = async (req, { params }) => {
+  try {
+    const { productId } = params
+
+    await connectMongoDB()
+
+    const product = await Product.findById(productId)
+
+    return NextResponse.json({ product }, { status: 200 })
+  } catch (error) {
+    console.log('[PRODUCT_GET]', error)
     return new NextResponse('Internal error', { status: 500 })
   }
 }

@@ -4,44 +4,21 @@ import axios from 'axios'
 import Image from 'next/image'
 import { toast } from 'react-hot-toast'
 import moment from 'moment'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 const ProductCard = (props) => {
-  const {
-    product,
-    getProducts,
-    setIsLoading,
-    setProduct,
-    setDetailsOn,
-    setEditOn,
-  } = props
+  const { product, openEdit, openDetails, queryClient } = props
 
-  const openDetails = (p) => {
-    setProduct(p)
-    setDetailsOn(true)
-  }
-
-  const openEdit = (p) => {
-    setProduct(p)
-    setEditOn(true)
-  }
+  const { mutate, isLoading } = useMutation({
+    mutationFn: (id) => axios.delete(`/api/products/${id}`),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['products'] }),
+  })
 
   const deleteProduct = async () => {
-    setIsLoading(true)
-    await axios
-      .delete(`/api/products/${product?.id}`)
-      .then((res) => {
-        if (res.status === 200) {
-          toast.success('Product Deleted Successfully')
-          getProducts()
-        } else {
-          toast.error('Error, Something went wrong')
-        }
-      })
-      .catch((err) => {
-        console.error(err)
-        toast.error('Error, Something went wrong')
-      })
-      .finally(() => setIsLoading(false))
+    mutate(product?._id, {
+      onSuccess: () => toast.success('Product Deleted Successfully'),
+      onError: () => toast.error('Error, Something went wrong'),
+    })
   }
 
   return (
@@ -91,9 +68,11 @@ const ProductCard = (props) => {
           </button>
           <button
             onClick={deleteProduct}
-            className='py-1.5 w-full px-6 rounded-lg bg-red-500 hover:bg-red-600 transition text-white'
+            className={`py-1.5 w-full px-6 rounded-lg bg-red-500 hover:bg-red-600 transition text-white ${
+              isLoading && 'opacity-50'
+            }`}
           >
-            Delete
+            {isLoading ? 'Deleting...' : 'Delete'}
           </button>
         </div>
       </div>

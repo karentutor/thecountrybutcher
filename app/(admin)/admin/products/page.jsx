@@ -2,22 +2,38 @@
 
 import axios from 'axios'
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { CldUploadWidget } from 'next-cloudinary'
 import { BsImageAlt, BsTrash, BsX } from 'react-icons/bs'
 import { toast } from 'react-hot-toast'
+import { useQueryClient, useMutation, useQuery } from '@tanstack/react-query'
 
 import ProductCard from '../components/ProductCard'
 import Loader from '@/components/Loader'
 
 const Products = () => {
-  const [products, setProducts] = useState([])
-  const [isLoading, setIsLoading] = useState(false)
   const [modalOn, setModalOn] = useState(false)
   const [detailsOn, setDetailsOn] = useState(false)
   const [editOn, setEditOn] = useState(false)
   const [product, setProduct] = useState({})
+
+  const queryClient = useQueryClient()
+
+  const createProduct = useMutation({
+    mutationFn: (data) => axios.post('/api/products', data),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['products'] }),
+  })
+
+  const updateProduct = useMutation({
+    mutationFn: (data) => axios.patch(`/api/products/${product?._id}`, data),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['products'] }),
+  })
+
+  const productsQuery = useQuery({
+    queryKey: ['products'],
+    queryFn: () => axios.get('/api/products'),
+  })
 
   const {
     register,
@@ -37,15 +53,6 @@ const Products = () => {
     formState: { errors: editErrors },
   } = useForm()
 
-  const getProducts = () => {
-    setIsLoading(true)
-    axios
-      .get('/api/products')
-      .then((res) => setProducts(res.data))
-      .catch((err) => console.error(err))
-      .finally(() => setIsLoading(false))
-  }
-
   const onUpload = (result) => {
     setValue('imageUrl', result.info.secure_url)
   }
@@ -54,54 +61,36 @@ const Products = () => {
   }
 
   const onSubmit = (data) => {
-    console.log(data)
-
-    setIsLoading(true)
-    axios
-      .post('/api/products', data)
-      .then((res) => {
-        console.log(res)
+    createProduct.mutate(data, {
+      onSuccess: () => {
         setModalOn(false)
         toast.success('Product Created Successfully')
         reset()
-        getProducts()
-      })
-      .catch((err) => {
-        console.error(err)
+      },
+      onError: () => {
         toast.error('Error, Something went wrong')
         setModalOn(false)
         reset()
-      })
-      .finally(() => setIsLoading(false))
+      },
+    })
   }
 
   const onEditSubmit = (data) => {
-    setIsLoading(true)
-
     if (!data?.imageUrl) data.imageUrl = product?.imageUrl
-    console.log(data)
 
-    axios
-      .patch(`/api/products/${product?.id}`, data)
-      .then((res) => {
-        console.log(res)
+    updateProduct.mutate(data, {
+      onSuccess: () => {
         setEditOn(false)
         toast.success('Product Edited Successfully')
         editReset()
-        getProducts()
-      })
-      .catch((err) => {
-        console.error(err)
+      },
+      onError: () => {
         toast.error('Error, Something went wrong')
         setEditOn(false)
-        reset()
-      })
-      .finally(() => setIsLoading(false))
+        editReset()
+      },
+    })
   }
-
-  useEffect(() => {
-    getProducts()
-  }, [])
 
   const openModal = () => {
     setModalOn(true)
@@ -109,11 +98,18 @@ const Products = () => {
 
   const closeModal = () => {
     setModalOn(false)
+    setProduct({})
     reset()
   }
 
-  const closeDetails = () => setDetailsOn(false)
-  const closeEdit = () => setEditOn(false)
+  const closeDetails = () => {
+    setDetailsOn(false)
+    setProduct({})
+  }
+  const closeEdit = () => {
+    setEditOn(false)
+    setProduct({})
+  }
 
   const handleClose = (e) => {
     if (e.target.id === 'container') {
@@ -121,6 +117,21 @@ const Products = () => {
       closeDetails()
       closeEdit()
     }
+  }
+
+  const openDetails = (p) => {
+    setProduct(p)
+    setDetailsOn(true)
+  }
+
+  const openEdit = (p) => {
+    editSetValue('title', p.title)
+    editSetValue('description', p.description)
+    editSetValue('price', p.price)
+    editSetValue('special', p.special)
+    editSetValue('imageUrl', p.imageUrl)
+    setProduct(p)
+    setEditOn(true)
   }
 
   return (
@@ -134,19 +145,17 @@ const Products = () => {
           New Product
         </button>
       </div>
-      {isLoading ? (
+      {productsQuery.isLoading ? (
         <Loader />
       ) : (
         <div className='max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 place-items-center gap-4 py-6'>
-          {products.map((product) => (
+          {productsQuery?.data?.data?.map((product) => (
             <ProductCard
               product={product}
-              key={product.id}
-              setIsLoading={setIsLoading}
-              getProducts={getProducts}
-              setProduct={setProduct}
-              setDetailsOn={setDetailsOn}
-              setEditOn={setEditOn}
+              key={product._id}
+              openDetails={openDetails}
+              openEdit={openEdit}
+              queryClient={queryClient}
             />
           ))}
         </div>
@@ -288,6 +297,7 @@ const Products = () => {
                           fill
                           className='object-cover'
                           alt='Image'
+                          sizes='100vw'
                           src={watch('imageUrl')}
                         />
                       </div>
@@ -302,7 +312,7 @@ const Products = () => {
                     {({ open }) => (
                       <button
                         type='button'
-                        disabled={isLoading}
+                        disabled={createProduct.isLoading}
                         onClick={() => open()}
                         className='py-2 px-6 rounded-lg flex items-center gap-2 bg-gray-200'
                       >
@@ -317,16 +327,18 @@ const Products = () => {
               <div className='flex items-center justify-end gap-4'>
                 <button
                   type='submit'
-                  disabled={isLoading}
+                  disabled={createProduct.isLoading}
                   className={`bg-primary-800 hover:bg-primary-900 transition text-white py-2 my-6 px-8 rounded-lg ${
-                    isLoading && 'opacity-50'
+                    createProduct.isLoading && 'opacity-50'
                   }`}
                 >
-                  {isLoading ? 'Creating product...' : 'Create Product'}
+                  {createProduct.isLoading
+                    ? 'Creating product...'
+                    : 'Create Product'}
                 </button>
                 <button
                   type='button'
-                  disabled={isLoading}
+                  disabled={createProduct.isLoading}
                   onClick={closeModal}
                   className='bg-gray-300 hover:bg-gray-400 transition py-2 my-6 px-8 rounded-lg'
                 >
@@ -451,7 +463,7 @@ const Products = () => {
                 <input
                   type='text'
                   id='title'
-                  defaultValue={product?.title}
+                  defaultValue={product.title}
                   className={`w-full border py-2 px-4 outline-none rounded-lg ${
                     editErrors.title ? 'border-red-500' : 'border-gray-400'
                   }`}
@@ -576,6 +588,7 @@ const Products = () => {
                           fill
                           className='object-cover'
                           alt='Image'
+                          sizes='100vw'
                           src={
                             editWatch('imageUrl')
                               ? editWatch('imageUrl')
@@ -593,7 +606,7 @@ const Products = () => {
                     {({ open }) => (
                       <button
                         type='button'
-                        disabled={isLoading}
+                        disabled={updateProduct.isLoading}
                         onClick={() => open()}
                         className='py-2 px-6 rounded-lg flex items-center gap-2 bg-gray-200'
                       >
@@ -607,16 +620,18 @@ const Products = () => {
               <div className='flex items-center justify-end gap-4'>
                 <button
                   type='submit'
-                  disabled={isLoading}
+                  disabled={updateProduct.isLoading}
                   className={`bg-primary-800 hover:bg-primary-900 transition text-white py-2 my-6 px-8 rounded-lg ${
-                    isLoading && 'opacity-50'
+                    updateProduct.isLoading && 'opacity-50'
                   }`}
                 >
-                  {isLoading ? 'Editing product...' : 'Edit Product'}
+                  {updateProduct.isLoading
+                    ? 'Editing product...'
+                    : 'Edit Product'}
                 </button>
                 <button
                   type='button'
-                  disabled={isLoading}
+                  disabled={updateProduct.isLoading}
                   onClick={closeEdit}
                   className='bg-gray-300 hover:bg-gray-400 transition py-2 my-6 px-8 rounded-lg'
                 >

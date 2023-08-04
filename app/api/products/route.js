@@ -1,46 +1,32 @@
-import client from '@/prisma/client'
+import connectMongoDB from '@/libs/db'
+import Product from '@/models/product'
 import { NextResponse } from 'next/server'
 
-export async function POST(req) {
+export const POST = async (req) => {
   try {
     const body = await req.json()
 
     const { title, description, imageUrl, price, special } = body
 
-    if (!title && !description && !imageUrl && !price) {
-      return new NextResponse('Something is Missing', { status: 400 })
-    }
-    if (title.length > 50) {
-      return new NextResponse('Title have to be less than 50 char', {
-        status: 400,
-      })
-    }
-    if (description.length > 300) {
-      return new NextResponse('Description have to be less than 300 char', {
-        status: 400,
-      })
-    }
+    await connectMongoDB()
 
-    const product = await client.product.create({
-      data: {
-        title,
-        description,
-        imageUrl,
-        price,
-        special,
-      },
-    })
+    await Product.create({ title, description, price, imageUrl, special })
 
-    return NextResponse.json(product)
+    return NextResponse.json(
+      { message: 'product created successfully' },
+      { status: 201 }
+    )
   } catch (error) {
     console.log('[PRODUCTS_POST]', error)
     return new NextResponse('Internal error', { status: 500 })
   }
 }
 
-export async function GET() {
+export const GET = async () => {
   try {
-    const products = await client.product.findMany()
+    await connectMongoDB()
+
+    const products = await Product.find()
 
     return NextResponse.json(products)
   } catch (error) {

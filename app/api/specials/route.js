@@ -1,13 +1,13 @@
-import client from '@/prisma/client'
 import { NextResponse } from 'next/server'
 
-export async function GET() {
+import connectMongoDB from '@/libs/db'
+import Product from '@/models/product'
+
+export const GET = async () => {
   try {
-    const products = await client.product.findMany({
-      where: {
-        special: true,
-      },
-    })
+    await connectMongoDB()
+
+    const products = await Product.find({ special: true })
 
     return NextResponse.json(products)
   } catch (error) {

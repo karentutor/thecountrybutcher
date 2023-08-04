@@ -70,14 +70,14 @@ const ProductList = () => {
           ) : (
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10'>
               {products?.data?.map((product) => (
-                <div className='flex flex-col gap-3 w-fit' key={product?.id}>
+                <div className='flex flex-col gap-3 w-fit' key={product?._id}>
                   <div className='space-y-2'>
                     <h3 className='text-2xl md:text-3xl font-bold uppercase text-secondary'>
                       {product?.title}
                     </h3>
                     <p>${product?.price}</p>
                   </div>
-                  <div className=''>
+                  <div>
                     <Image
                       src={product?.imageUrl}
                       alt={product?.title}
