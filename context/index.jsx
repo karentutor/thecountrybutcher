@@ -11,9 +11,6 @@ export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState(
     getCookie('user') ? JSON.parse(getCookie('user')) : {}
   )
-  // typeof window !== 'undefined'
-  //   ? JSON.parse(localStorage.getItem('user'))
-  //   : {}
 
   const queryClient = new QueryClient()
 

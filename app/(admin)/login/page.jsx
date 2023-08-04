@@ -27,7 +27,6 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     setIsLoading(false)
-    console.log(data)
 
     if (data.email === 'admin@gmail.com' && data.password === 'admin') {
       router.push('/admin/home')
