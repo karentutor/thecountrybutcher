@@ -4,6 +4,7 @@ import {
   FaInstagram,
   FaStar,
   FaShoppingCart,
+  FaEnvelope,
 } from 'react-icons/fa'
 
 export const navLinks = [
@@ -21,7 +22,6 @@ export const navLinks = [
     route: '/specials',
   },
   { id: 4, text: 'Contact', route: '/contact' },
-
 ]
 export const footerLinks = [
   { id: 1, text: 'Home', route: '/' },
@@ -257,5 +257,48 @@ export const sidebarLinks = [
     name: 'Specials',
     icon: FaStar,
     route: '/admin/specials',
+  },
+  {
+    id: 4,
+    name: 'Messages',
+    icon: FaEnvelope,
+    route: '/admin/messages',
+  },
+]
+export const messagesHead = [
+  '',
+  'First name',
+  'Last name',
+  'Email',
+  'Phone',
+  'Message',
+]
+export const messages = [
+  {
+    id: 1,
+    firstName: 'John',
+    lastName: 'Doe',
+    email: 'johdoe234@gmail.com',
+    phone: '0093582567429',
+    message:
+      'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo molestiae architecto accusamus tetur adipisicing elit. Illo molestiae architecto accusamus',
+  },
+  {
+    id: 2,
+    firstName: 'John',
+    lastName: 'Doe',
+    email: 'johdoe234@gmail.com',
+    phone: '0093582567429',
+    message:
+      'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo molestiae architecto accusamus',
+  },
+  {
+    id: 3,
+    firstName: 'John',
+    lastName: 'Doe',
+    email: 'johdoe234@gmail.com',
+    phone: '0093582567429',
+    message:
+      'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo molestiae architecto accusamus',
   },
 ]

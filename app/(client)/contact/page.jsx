@@ -1,17 +1,32 @@
 'use client'
 
+import { useMutation } from '@tanstack/react-query'
+import axios from 'axios'
 import Image from 'next/image'
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-hot-toast'
 
 const Contact = () => {
+  const { mutate, isLoading } = useMutation({
+    mutationFn: (data) => axios.post('/api/messages', data),
+  })
+
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm()
 
   const onSubmit = (data) => {
     console.log(data)
+    mutate(data, {
+      onSuccess: () => {
+        toast.success("thank you for contact, we'll stay in touch")
+        reset()
+      },
+      onError: () => toast.error('something went wrong'),
+    })
   }
 
   return (
@@ -105,33 +120,39 @@ const Contact = () => {
           >
             <div className='flex flex-col md:flex-row w-full gap-4'>
               <div className='flex flex-col gap-1 w-full'>
-                <label htmlFor='f_name'>First Name</label>
+                <label htmlFor='firstName'>First Name</label>
                 <input
                   type='text'
-                  {...register('f_name', {
+                  disabled={isLoading}
+                  {...register('firstName', {
                     required: { value: true, message: 'required' },
                   })}
                   className={`w-full border outline-none p-3 rounded-lg bg-white ${
-                    errors.f_name ? 'border-red-500' : 'border-primary-900'
+                    errors.firstName ? 'border-red-500' : 'border-primary-900'
                   }`}
                 />
-                {errors.f_name && (
-                  <span className='text-red-500'>{errors.f_name.message}</span>
+                {errors.firstName && (
+                  <span className='text-red-500'>
+                    {errors.firstName.message}
+                  </span>
                 )}
               </div>
               <div className='flex flex-col gap-1 w-full'>
-                <label htmlFor='l_name'>Last Name</label>
+                <label htmlFor='lastName'>Last Name</label>
                 <input
                   type='text'
-                  {...register('l_name', {
+                  disabled={isLoading}
+                  {...register('lastName', {
                     required: { value: true, message: 'required' },
                   })}
                   className={`w-full border outline-none p-3 rounded-lg bg-white ${
-                    errors.l_name ? 'border-red-500' : 'border-primary-900'
+                    errors.lastName ? 'border-red-500' : 'border-primary-900'
                   }`}
                 />
-                {errors.l_name && (
-                  <span className='text-red-500'>{errors.l_name.message}</span>
+                {errors.lastName && (
+                  <span className='text-red-500'>
+                    {errors.lastName.message}
+                  </span>
                 )}
               </div>
             </div>
@@ -140,6 +161,7 @@ const Contact = () => {
                 <label htmlFor='email'>Email</label>
                 <input
                   type='email'
+                  disabled={isLoading}
                   {...register('email', {
                     required: { value: true, message: 'required' },
                   })}
@@ -155,6 +177,7 @@ const Contact = () => {
                 <label htmlFor='phone'>Phone</label>
                 <input
                   type='text'
+                  disabled={isLoading}
                   {...register('phone', {
                     required: { value: true, message: 'required' },
                   })}
@@ -172,6 +195,7 @@ const Contact = () => {
               <textarea
                 type='text'
                 rows={5}
+                disabled={isLoading}
                 {...register('message', {
                   required: { value: true, message: 'required' },
                 })}
@@ -183,8 +207,13 @@ const Contact = () => {
                 <span className='text-red-500'>{errors.message.message}</span>
               )}
             </div>
-            <button className='bg-primary-900 px-12 py-4 mt-4 text-2xl tracking-widest text-white uppercase w-fit'>
-              submit form
+            <button
+              disabled={isLoading}
+              className={`bg-primary-900 px-12 py-4 mt-4 text-2xl tracking-widest text-white uppercase w-fit ${
+                isLoading && 'opacity-50'
+              }`}
+            >
+              {isLoading ? 'submitting...' : 'submit form'}
             </button>
           </form>
         </div>

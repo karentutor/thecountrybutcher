@@ -21,7 +21,7 @@ const Home = () => {
   if (productsQuery.isError) return <Error />
 
   return (
-    <div>
+    <>
       <h1 className='text-2xl lg:text-3xl font-bold my-4'>Home</h1>
       <div className='w-full text-[#45454E] p-2'>
         <div className='flex flex-wrap lg:flex-nowrap justify-center items-center gap-10 w-full text-[#7f7f86]'>
@@ -41,7 +41,7 @@ const Home = () => {
           />
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
