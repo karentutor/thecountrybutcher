@@ -50,31 +50,29 @@ const Footer = () => {
           dir='ltr'
         >
           <a
-            href='https://www.google.com/maps?ll=36.776807,-76.091684&z=15&t=m&hl=en&gl=EG&mapclient=embed&q=3640+Dam+Neck+Rd+%23216+Virginia+Beach,+VA+23453+USA'
-            target='_blank'
-            rel='noreferrer'
+            href='#map'
             className='flex items-center gap-2 hover:text-white text-center'
           >
             <FaMap className='text-xl hidden md:inline-block' />
-            3640 Dam Neck Rd #216, Virginia Beach, VA 23453, USA
+            {process.env.NEXT_PUBLIC_ADDRESS}
           </a>
           <a
-            href='mailto:countrybutchershopanddeli@gmail.com'
+            href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`}
             target='_blank'
             rel='noreferrer'
             className='flex items-center gap-2 hover:text-white'
           >
             <FaMailBulk className='text-xl' />
-            countrybutchershopanddeli@gmail.com
+            {process.env.NEXT_PUBLIC_EMAIL}
           </a>
           <a
-            href='https://api.whatsapp.com/send?phone=+17574681583&text=Hello,%20more%20information!'
+            href={`https://api.whatsapp.com/send?phone=${process.env.NEXT_PUBLIC_PHONE}&text=Hello,%20more%20information!`}
             target='_blank'
             rel='noreferrer'
             className='flex items-center gap-2 hover:text-white'
           >
             <FaWhatsapp className='text-xl' />
-            +1 757-468-1583
+            {process.env.NEXT_PUBLIC_PHONE}
           </a>
           <div className='flex justify-between gap-6 md:gap-10 max-w-[275px] md:max-w-[375px] mt-4'>
             {socialLinks.map((link) => (

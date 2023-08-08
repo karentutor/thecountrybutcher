@@ -22,7 +22,7 @@ const Specials = () => {
         title="“IF IT'S NOT RAISED RIGHT IT CAN'T BE DELICIOUS.”"
         title2='NO HORMONES - NO ANTIBIOTICS - PASTURE-RAISED'
         slides={specialSlides}
-        btnText='Start shoping'
+        btnText='Start shopping'
         btnUrl='/product-list'
       />
       <Banner

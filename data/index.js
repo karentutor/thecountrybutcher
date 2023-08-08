@@ -9,8 +9,6 @@ import {
 
 export const navLinks = [
   { id: 1, text: 'Home', route: '/' },
-
-  // { id: 2, text: 'Our Story', route: '/our-story' },
   {
     id: 2,
     text: 'Products',
