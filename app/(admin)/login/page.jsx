@@ -28,10 +28,13 @@ const Login = () => {
   const onSubmit = async (data) => {
     setIsLoading(false)
 
-    if (data.email === 'admin@gmail.com' && data.password === 'admin') {
-      router.push('/admin/home')
+    if (
+      data.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL &&
+      data.password === process.env.NEXT_PUBLIC_ADMIN_PASS
+    ) {
       setAuth(data)
       setCookie('user', JSON.stringify(data), { maxAge: 60 * 6 * 24 })
+      router.replace('/admin/home')
       toast.success(`Welcome ${data.email.split('@')[0]}`)
       reset()
     } else {

@@ -18,7 +18,7 @@ const Specials = () => {
 
   const mutation = useMutation({
     mutationKey: ['deleteSpecial'],
-    mutationFn: (data) => axios.patch(`/api/products/${data.id}`, data),
+    mutationFn: (data) => axios.patch(`/api/products/${data._id}`, data),
     onMutate: async (sp) => {
       await queryClient.cancelQueries({ queryKey: ['specials'] })
 
@@ -69,7 +69,7 @@ const Specials = () => {
           ) : (
             data?.data?.map((product) => (
               <div
-                key={product.id}
+                key={product._id}
                 className='max-w-[280px] md:max-w-xs border bg-white border-gray-200 min-w-[280px] md:min-w-[320px] hover:shadow-lg transition duration-150 ease-in-out rounded-lg border-solid h-[450px] max-h-[450px]'
               >
                 <div className='rounded-tl-lg relative rounded-tr-lg overflow-hidden h-[250px]'>

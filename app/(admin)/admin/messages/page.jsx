@@ -64,38 +64,40 @@ const Messages = () => {
               </tr>
             </thead>
             <tbody>
-              {data?.data?.map((msg, i) => (
-                <tr
-                  className='text-center even:bg-white odd:bg-gray-100'
-                  key={msg._id}
-                >
-                  <td>{i + 1}</td>
-                  <td>{msg.firstName}</td>
-                  <td>{msg.lastName}</td>
-                  <td>{msg.email}</td>
-                  <td>{msg.phone}</td>
-                  <td>
-                    {msg.message.length > 100
-                      ? `${msg.message.slice(0, 100)}...`
-                      : msg.message}
-                  </td>
+              {data?.data
+                ?.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+                .map((msg, i) => (
+                  <tr
+                    className='text-center even:bg-white odd:bg-gray-100'
+                    key={msg._id}
+                  >
+                    <td>{i + 1}</td>
+                    <td>{msg.firstName}</td>
+                    <td>{msg.lastName}</td>
+                    <td>{msg.email}</td>
+                    <td>{msg.phone}</td>
+                    <td>
+                      {msg.message.length > 100
+                        ? `${msg.message.slice(0, 100)}...`
+                        : msg.message}
+                    </td>
 
-                  <td className='flex justify-center gap-4 items-center p-2'>
-                    <button
-                      onClick={() => openDetails(msg)}
-                      className='p-2 flex items-center justify-center rounded-full bg-primary-800 hover:bg-primary-900 transition text-white'
-                    >
-                      <FaInfo />
-                    </button>
-                    <button
-                      onClick={() => deleteMessage(msg._id)}
-                      className='p-2 flex items-center justify-center rounded-full bg-red-500 hover:bg-red-600 transition text-white'
-                    >
-                      <FaTrash />
-                    </button>
-                  </td>
-                </tr>
-              ))}
+                    <td className='flex justify-center gap-4 items-center p-2'>
+                      <button
+                        onClick={() => openDetails(msg)}
+                        className='p-2 flex items-center justify-center rounded-full bg-primary-800 hover:bg-primary-900 transition text-white'
+                      >
+                        <FaInfo />
+                      </button>
+                      <button
+                        onClick={() => deleteMessage(msg._id)}
+                        className='p-2 flex items-center justify-center rounded-full bg-red-500 hover:bg-red-600 transition text-white'
+                      >
+                        <FaTrash />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         )}

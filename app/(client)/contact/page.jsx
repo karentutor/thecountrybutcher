@@ -47,7 +47,7 @@ const Contact = () => {
         {/* Map */}
         <div className='flex-1'>
           <iframe
-            src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6391.501965980903!2d-76.09594375241666!3d36.77654087279475!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89babf818a7332c1%3A0x1c705417e3694a1!2s3640%20Dam%20Neck%20Rd%20%23216%2C%20Virginia%20Beach%2C%20VA%2023453%2C%20USA!5e0!3m2!1sen!2seg!4v1689361806553!5m2!1sen!2seg'
+            src={process.env.NEXT_PUBLIC_MAP_STRING}
             className='border-none w-full h-96 md:h-full'
             loading='lazy'
             referrerPolicy='no-referrer-when-downgrade'
@@ -69,16 +69,25 @@ const Contact = () => {
               Contact Info
             </h2>
             <div className='text-secondary text-xl flex flex-col gap-3'>
-              <a href='tel:+17574681583' rel='noreferrer' target='_blank'>
-                Phone: <span className='text-primary-900'>235-6926-358</span>
+              <a
+                href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`}
+                rel='noreferrer'
+                target='_blank'
+              >
+                Email:{' '}
+                <span className='text-primary-900'>
+                  {process.env.NEXT_PUBLIC_EMAIL}
+                </span>
               </a>
               <a
-                href='https://api.whatsapp.com/send?phone=+17574681583&text=Hello,%20more%20information!'
+                href={`https://api.whatsapp.com/send?phone=${process.env.NEXT_PUBLIC_PHONE}&text=Hello,%20more%20information!`}
                 rel='noreferrer'
                 target='_blank'
               >
                 Whatsapp:{' '}
-                <span className='text-primary-900'>+1 757-468-1583</span>
+                <span className='text-primary-900'>
+                  {process.env.NEXT_PUBLIC_PHONE}
+                </span>
               </a>
             </div>
             <p className='text-gray-700 text-xl font-thin'>
@@ -88,17 +97,14 @@ const Contact = () => {
           <div className='flex flex-col gap-4'>
             <h2 className='text-3xl md:text-4xl text-secondary'>Address</h2>
             <p className='text-gray-700 text-xl font-thin'>
-              3640 Dam Neck Rd #216
-            </p>
-            <p className='text-gray-700 text-xl font-thin'>
-              Virginia Beach, VA 23453, USA
+              {process.env.NEXT_PUBLIC_ADDRESS}
             </p>
           </div>
           <a
-            href='https://www.google.com/maps?ll=36.776807,-76.091684&z=15&t=m&hl=en&gl=EG&mapclient=embed&q=3640+Dam+Neck+Rd+%23216+Virginia+Beach,+VA+23453+USA'
+            href={process.env.NEXT_PUBLIC_GOOGLE_MAP_LINK}
             target='_blank'
             rel='noreferrer'
-            className='uppercase self-end text-primary-900 text-2xl font-thin'
+            className='uppercase self-end text-primary-900 text-2xl font-thin cursor-pointer'
           >
             Get Directions
           </a>
@@ -111,8 +117,7 @@ const Contact = () => {
             get in touch
           </h2>
           <p className='text-gray-700 text-lg'>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo
-            molestiae architecto accusamus?
+            Connecting with Us: Your Pathway to Reach Our Team
           </p>
           <form
             onSubmit={handleSubmit(onSubmit)}
