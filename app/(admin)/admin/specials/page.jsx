@@ -7,10 +7,10 @@ import { useState } from 'react'
 import { BsImageAlt, BsTrash, BsX } from 'react-icons/bs'
 import moment from 'moment'
 import { toast } from 'react-hot-toast'
+import { useForm } from 'react-hook-form'
+import { CldUploadWidget } from 'next-cloudinary'
 
 import Loader from '@/components/Loader'
-import { CldUploadWidget } from 'next-cloudinary'
-import { useForm } from 'react-hook-form'
 
 const Specials = () => {
   const [detailsOn, setDetailsOn] = useState(false)
@@ -18,6 +18,9 @@ const Specials = () => {
   const [special, setSpecial] = useState({})
 
   const queryClient = useQueryClient()
+
+  queryClient.invalidateQueries({ queryKey: ['specials'] })
+  queryClient.invalidateQueries({ queryKey: ['products'] })
 
   const mutation = useMutation({
     mutationKey: ['deleteSpecial'],
@@ -31,11 +34,11 @@ const Specials = () => {
 
     //   return { previousSpecial, sp }
     // },
-    onSuccess: () => {
-      toast.success('Product Removed from Specials Successfully')
-      queryClient.invalidateQueries({ queryKey: ['specials'] })
-      queryClient.invalidateQueries({ queryKey: ['products'] })
-    },
+    // onSuccess: () => {
+    //   toast.success('Product Removed from Specials Successfully')
+    //   queryClient.invalidateQueries({ queryKey: ['specials'] })
+    //   queryClient.invalidateQueries({ queryKey: ['products'] })
+    // },
     // onSettled: () => queryClient.invalidateQueries({ queryKey: ['specials'] }),
   })
 
@@ -50,20 +53,20 @@ const Specials = () => {
 
     //   return { previousSpecial, sp }
     // },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['specials'] })
-      queryClient.invalidateQueries({ queryKey: ['products'] })
-    },
-  })
-
-  const { data, isLoading, isSuccess } = useQuery({
-    queryKey: ['specials'],
-    queryFn: () => axios.get('/api/specials'),
+    // onSuccess: () => {
+    //   queryClient.invalidateQueries({ queryKey: ['specials'] })
+    //   queryClient.invalidateQueries({ queryKey: ['products'] })
+    // },
   })
 
   const deleteSpecial = (product) => {
     mutation.mutate({ ...product, special: false })
   }
+
+  const { data, isLoading, isSuccess } = useQuery({
+    queryKey: ['specials'],
+    queryFn: () => axios.get('/api/specials'),
+  })
 
   const {
     register,
