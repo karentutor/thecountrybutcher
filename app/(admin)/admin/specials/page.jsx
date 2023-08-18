@@ -22,32 +22,38 @@ const Specials = () => {
   const mutation = useMutation({
     mutationKey: ['deleteSpecial'],
     mutationFn: (data) => axios.patch(`/api/products/${data._id}`, data),
-    onMutate: async (sp) => {
-      await queryClient.cancelQueries({ queryKey: ['specials'] })
+    // onMutate: async (sp) => {
+    //   await queryClient.cancelQueries({ queryKey: ['specials'] })
 
-      const previousSpecial = queryClient.getQueryData(['specials'])
+    //   const previousSpecial = queryClient.getQueryData(['specials'])
 
-      queryClient.setQueryData(['specials'], sp)
+    //   queryClient.setQueryData(['specials'], sp)
 
-      return { previousSpecial, sp }
+    //   return { previousSpecial, sp }
+    // },
+    onSuccess: () => {
+      toast.success('Product Removed from Specials Successfully')
+      queryClient.invalidateQueries({ queryKey: ['specials'] })
+      queryClient.invalidateQueries({ queryKey: ['products'] })
     },
-    onSuccess: () =>
-      toast.success('Product Removed from Specials Successfully'),
-    onSettled: () => queryClient.invalidateQueries({ queryKey: ['specials'] }),
+    // onSettled: () => queryClient.invalidateQueries({ queryKey: ['specials'] }),
   })
 
   const createSpecial = useMutation({
     mutationFn: (data) => axios.post('/api/products', data),
-    onMutate: async (sp) => {
-      await queryClient.cancelQueries({ queryKey: ['specials'] })
+    // onMutate: async (sp) => {
+    //   await queryClient.cancelQueries({ queryKey: ['specials'] })
 
-      const previousSpecial = queryClient.getQueryData(['specials'])
+    //   const previousSpecial = queryClient.getQueryData(['specials'])
 
-      queryClient.setQueryData(['specials'], sp)
+    //   queryClient.setQueryData(['specials'], sp)
 
-      return { previousSpecial, sp }
+    //   return { previousSpecial, sp }
+    // },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['specials'] })
+      queryClient.invalidateQueries({ queryKey: ['products'] })
     },
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['specials'] }),
   })
 
   const { data, isLoading, isSuccess } = useQuery({
