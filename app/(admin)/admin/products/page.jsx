@@ -22,12 +22,14 @@ const Products = () => {
 
   const createProduct = useMutation({
     mutationFn: (data) => axios.post('/api/products', data),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['products'] }),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ['products', 'specials'] }),
   })
 
   const updateProduct = useMutation({
     mutationFn: (data) => axios.patch(`/api/products/${product?._id}`, data),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['products'] }),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ['products', 'specials'] }),
   })
 
   const productsQuery = useQuery({
