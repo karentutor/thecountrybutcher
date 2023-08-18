@@ -19,44 +19,22 @@ const Specials = () => {
 
   const queryClient = useQueryClient()
 
-  queryClient.invalidateQueries({ queryKey: ['specials'] })
-  queryClient.invalidateQueries({ queryKey: ['products'] })
-
   const mutation = useMutation({
     mutationKey: ['deleteSpecial'],
     mutationFn: (data) => axios.patch(`/api/products/${data._id}`, data),
-    // onMutate: async (sp) => {
-    //   await queryClient.cancelQueries({ queryKey: ['specials'] })
-
-    //   const previousSpecial = queryClient.getQueryData(['specials'])
-
-    //   queryClient.setQueryData(['specials'], sp)
-
-    //   return { previousSpecial, sp }
-    // },
-    // onSuccess: () => {
-    //   toast.success('Product Removed from Specials Successfully')
-    //   queryClient.invalidateQueries({ queryKey: ['specials'] })
-    //   queryClient.invalidateQueries({ queryKey: ['products'] })
-    // },
-    // onSettled: () => queryClient.invalidateQueries({ queryKey: ['specials'] }),
+    onSuccess: () => {
+      toast.success('Product Removed from Specials Successfully')
+      queryClient.invalidateQueries({ queryKey: ['specials'] })
+      queryClient.invalidateQueries({ queryKey: ['products'] })
+    },
   })
 
   const createSpecial = useMutation({
     mutationFn: (data) => axios.post('/api/products', data),
-    // onMutate: async (sp) => {
-    //   await queryClient.cancelQueries({ queryKey: ['specials'] })
-
-    //   const previousSpecial = queryClient.getQueryData(['specials'])
-
-    //   queryClient.setQueryData(['specials'], sp)
-
-    //   return { previousSpecial, sp }
-    // },
-    // onSuccess: () => {
-    //   queryClient.invalidateQueries({ queryKey: ['specials'] })
-    //   queryClient.invalidateQueries({ queryKey: ['products'] })
-    // },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['specials'] })
+      queryClient.invalidateQueries({ queryKey: ['products'] })
+    },
   })
 
   const deleteSpecial = (product) => {
@@ -64,9 +42,11 @@ const Specials = () => {
   }
 
   const { data, isLoading, isSuccess } = useQuery({
-    queryKey: ['specials'],
-    queryFn: () => axios.get('/api/specials'),
+    queryKey: ['products'],
+    queryFn: () => axios.get('/api/products'),
   })
+
+  const specials = data?.data?.filter((product) => product.special)
 
   const {
     register,
@@ -83,7 +63,6 @@ const Specials = () => {
 
   const onSubmit = (data) => {
     data.special = true
-    console.log(data)
     createSpecial.mutate(data, {
       onSuccess: () => {
         setModalOn(false)
@@ -134,12 +113,12 @@ const Specials = () => {
         <Loader />
       ) : (
         <div className='max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 place-items-center gap-4 py-6'>
-          {data?.data?.length === 0 && isSuccess ? (
+          {specials?.length === 0 && isSuccess ? (
             <div className='col-span-1 md:col-span-2 xl:col-span-3 text-3xl font-bold'>
               No Specials Found
             </div>
           ) : (
-            data?.data?.map((product) => (
+            specials?.map((product) => (
               <div
                 key={product._id}
                 className='max-w-[280px] md:max-w-xs border bg-white border-gray-200 min-w-[280px] md:min-w-[320px] hover:shadow-lg transition duration-150 ease-in-out rounded-lg border-solid h-[450px] max-h-[450px]'

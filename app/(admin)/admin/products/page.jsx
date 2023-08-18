@@ -20,23 +20,20 @@ const Products = () => {
 
   const queryClient = useQueryClient()
 
-  queryClient.invalidateQueries({ queryKey: ['products'] })
-  queryClient.invalidateQueries({ queryKey: ['specials'] })
-
   const createProduct = useMutation({
     mutationFn: (data) => axios.post('/api/products', data),
-    // onSuccess: () => {
-    //   queryClient.invalidateQueries({ queryKey: ['products'] })
-    //   queryClient.invalidateQueries({ queryKey: ['specials'] })
-    // },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['products'] })
+      queryClient.invalidateQueries({ queryKey: ['specials'] })
+    },
   })
 
   const updateProduct = useMutation({
     mutationFn: (data) => axios.patch(`/api/products/${product?._id}`, data),
-    // onSuccess: () => {
-    //   queryClient.invalidateQueries({ queryKey: ['products'] })
-    //   queryClient.invalidateQueries({ queryKey: ['specials'] })
-    // },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['products'] })
+      queryClient.invalidateQueries({ queryKey: ['specials'] })
+    },
   })
 
   const productsQuery = useQuery({

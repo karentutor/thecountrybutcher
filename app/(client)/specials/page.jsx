@@ -1,20 +1,22 @@
 'use client'
 
+import axios from 'axios'
+import { useQuery } from '@tanstack/react-query'
+
+import { specialSlides } from '@/data'
 import Banner from '@/components/Banner'
 import Hero from '@/components/Hero'
-import { specialProducts, specialSlides } from '@/data'
-import Featured from './components/Featured'
-import Link from 'next/link'
-import SpecialCard from './components/SpecialCard'
-import { useQuery } from '@tanstack/react-query'
-import axios from 'axios'
 import Loader from '@/components/Loader'
+import Featured from './components/Featured'
+import SpecialCard from './components/SpecialCard'
 
 const Specials = () => {
   const { data, isLoading } = useQuery({
-    queryKey: ['getSpecials'],
-    queryFn: () => axios.get('/api/specials'),
+    queryKey: ['getProducts'],
+    queryFn: () => axios.get('/api/products'),
   })
+
+  const specials = data?.data?.filter((pro) => pro.special)
 
   return (
     <div>
@@ -68,7 +70,7 @@ const Specials = () => {
             <Loader fullPage={false} />
           ) : (
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center gap-12'>
-              {data?.data?.map((product) => (
+              {specials?.map((product) => (
                 <SpecialCard key={product.id} product={product} />
               ))}
             </div>

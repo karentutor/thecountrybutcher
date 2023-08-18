@@ -1,5 +1,6 @@
-import { featured } from '@/data'
 import Image from 'next/image'
+
+import { featured } from '@/data'
 
 const Featured = () => {
   return (
