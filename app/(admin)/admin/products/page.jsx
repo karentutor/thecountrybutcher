@@ -1,45 +1,45 @@
-'use client'
+'use client';
 
-import axios from 'axios'
-import Image from 'next/image'
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { CldUploadWidget } from 'next-cloudinary'
-import { BsImageAlt, BsTrash, BsX } from 'react-icons/bs'
-import { toast } from 'react-hot-toast'
-import { useQueryClient, useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import axios from 'axios';
+import { CldUploadWidget } from 'next-cloudinary';
+import Image from 'next/image';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
+import { BsImageAlt, BsTrash, BsX } from 'react-icons/bs';
 
-import ProductCard from '../components/ProductCard'
-import Loader from '@/components/Loader'
+import Loader from '@/components/Loader';
+import ProductCard from '../components/ProductCard';
 
 const Products = () => {
-  const [modalOn, setModalOn] = useState(false)
-  const [detailsOn, setDetailsOn] = useState(false)
-  const [editOn, setEditOn] = useState(false)
-  const [product, setProduct] = useState({})
+  const [modalOn, setModalOn] = useState(false);
+  const [detailsOn, setDetailsOn] = useState(false);
+  const [editOn, setEditOn] = useState(false);
+  const [product, setProduct] = useState({});
 
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
 
   const createProduct = useMutation({
-    mutationFn: (data) => axios.post('/api/products', data),
+    mutationFn: data => axios.post('/api/products', data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['products'] })
-      queryClient.invalidateQueries({ queryKey: ['specials'] })
-    },
-  })
+      queryClient.invalidateQueries({ queryKey: ['products'] });
+      queryClient.invalidateQueries({ queryKey: ['specials'] });
+    }
+  });
 
   const updateProduct = useMutation({
-    mutationFn: (data) => axios.patch(`/api/products/${product?._id}`, data),
+    mutationFn: data => axios.patch(`/api/products/${product?._id}`, data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['products'] })
-      queryClient.invalidateQueries({ queryKey: ['specials'] })
-    },
-  })
+      queryClient.invalidateQueries({ queryKey: ['products'] });
+      queryClient.invalidateQueries({ queryKey: ['specials'] });
+    }
+  });
 
   const productsQuery = useQuery({
     queryKey: ['products'],
-    queryFn: () => axios.get('/api/products'),
-  })
+    queryFn: () => axios.get('/api/products')
+  });
 
   const {
     register,
@@ -47,8 +47,8 @@ const Products = () => {
     handleSubmit,
     watch,
     setValue,
-    formState: { errors },
-  } = useForm()
+    formState: { errors }
+  } = useForm();
 
   const {
     register: editRegister,
@@ -56,89 +56,94 @@ const Products = () => {
     handleSubmit: editHandleSubmit,
     watch: editWatch,
     setValue: editSetValue,
-    formState: { errors: editErrors },
-  } = useForm()
+    formState: { errors: editErrors }
+  } = useForm();
 
-  const onUpload = (result) => {
-    setValue('imageUrl', result.info.secure_url)
-  }
-  const onEditUpload = (result) => {
-    editSetValue('imageUrl', result.info.secure_url)
-  }
+  const onUpload = result => {
+    setValue('imageUrl', result.info.secure_url);
+  };
+  const onEditUpload = result => {
+    editSetValue('imageUrl', result.info.secure_url);
+  };
 
-  const onSubmit = (data) => {
+  const onSubmit = data => {
+    if (!data?.imageUrl) {
+      toast.error('Please upload an image');
+      return;
+    }
+
     createProduct.mutate(data, {
       onSuccess: () => {
-        setModalOn(false)
-        toast.success('Product Created Successfully')
-        reset()
+        setModalOn(false);
+        toast.success('Product Created Successfully');
+        reset();
       },
       onError: () => {
-        toast.error('Error, Something went wrong')
-        setModalOn(false)
-        reset()
-      },
-    })
-  }
+        toast.error('Error, Something went wrong');
+        setModalOn(false);
+        reset();
+      }
+    });
+  };
 
-  const onEditSubmit = (data) => {
-    if (!data?.imageUrl) data.imageUrl = product?.imageUrl
+  const onEditSubmit = data => {
+    if (!data?.imageUrl) data.imageUrl = product?.imageUrl;
 
     updateProduct.mutate(data, {
       onSuccess: () => {
-        setEditOn(false)
-        toast.success('Product Edited Successfully')
-        editReset()
+        setEditOn(false);
+        toast.success('Product Edited Successfully');
+        editReset();
       },
       onError: () => {
-        toast.error('Error, Something went wrong')
-        setEditOn(false)
-        editReset()
-      },
-    })
-  }
+        toast.error('Error, Something went wrong');
+        setEditOn(false);
+        editReset();
+      }
+    });
+  };
 
   const openModal = () => {
-    setModalOn(true)
-  }
+    setModalOn(true);
+  };
 
   const closeModal = () => {
-    setModalOn(false)
-    setProduct({})
-    reset()
-  }
+    setModalOn(false);
+    setProduct({});
+    reset();
+  };
 
   const closeDetails = () => {
-    setDetailsOn(false)
-    setProduct({})
-  }
+    setDetailsOn(false);
+    setProduct({});
+  };
   const closeEdit = () => {
-    setEditOn(false)
-    setProduct({})
-  }
+    setEditOn(false);
+    setProduct({});
+  };
 
-  const handleClose = (e) => {
+  const handleClose = e => {
     if (e.target.id === 'container') {
-      closeModal()
-      closeDetails()
-      closeEdit()
+      closeModal();
+      closeDetails();
+      closeEdit();
     }
-  }
+  };
 
-  const openDetails = (p) => {
-    setProduct(p)
-    setDetailsOn(true)
-  }
+  const openDetails = p => {
+    setProduct(p);
+    setDetailsOn(true);
+  };
 
-  const openEdit = (p) => {
-    editSetValue('title', p.title)
-    editSetValue('description', p.description)
-    editSetValue('price', p.price)
-    editSetValue('special', p.special)
-    editSetValue('imageUrl', p.imageUrl)
-    setProduct(p)
-    setEditOn(true)
-  }
+  const openEdit = p => {
+    editSetValue('title', p.title);
+    editSetValue('description', p.description);
+    editSetValue('price', p.price);
+    editSetValue('special', p.special);
+    editSetValue('imageUrl', p.imageUrl);
+    setProduct(p);
+    setEditOn(true);
+  };
 
   return (
     <>
@@ -155,7 +160,7 @@ const Products = () => {
         <Loader />
       ) : (
         <div className='max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 place-items-center gap-4 py-6'>
-          {productsQuery?.data?.data?.map((product) => (
+          {productsQuery?.data?.data?.map(product => (
             <ProductCard
               product={product}
               key={product._id}
@@ -195,7 +200,7 @@ const Products = () => {
                   }`}
                   {...register('title', {
                     required: { value: true, message: 'required' },
-                    maxLength: { value: 50, message: 'max length 50 char' },
+                    maxLength: { value: 50, message: 'max length 50 char' }
                   })}
                 />
                 <div className='flex items-center justify-between'>
@@ -224,7 +229,7 @@ const Products = () => {
                   {...register('price', {
                     required: { value: true, message: 'required' },
                     min: { value: 1, message: 'the minimum price is 1' },
-                    valueAsNumber: true,
+                    valueAsNumber: true
                   })}
                 />
                 {errors.price ? (
@@ -245,9 +250,9 @@ const Products = () => {
                   {...register('description', {
                     required: {
                       value: true,
-                      message: 'required',
+                      message: 'required'
                     },
-                    maxLength: { value: 300, message: 'max length 300 char' },
+                    maxLength: { value: 300, message: 'max length 300 char' }
                   })}
                 />
                 <div className='flex items-center justify-between'>
@@ -475,7 +480,7 @@ const Products = () => {
                   }`}
                   {...editRegister('title', {
                     required: { value: true, message: 'required' },
-                    maxLength: { value: 50, message: 'max length 50 char' },
+                    maxLength: { value: 50, message: 'max length 50 char' }
                   })}
                 />
                 <div className='flex items-center justify-between'>
@@ -505,7 +510,7 @@ const Products = () => {
                   {...editRegister('price', {
                     required: { value: true, message: 'required' },
                     min: { value: 1, message: 'the minimum price is 1' },
-                    valueAsNumber: true,
+                    valueAsNumber: true
                   })}
                 />
                 {editErrors.price ? (
@@ -529,9 +534,9 @@ const Products = () => {
                   {...editRegister('description', {
                     required: {
                       value: true,
-                      message: 'required',
+                      message: 'required'
                     },
-                    maxLength: { value: 300, message: 'max length 300 char' },
+                    maxLength: { value: 300, message: 'max length 300 char' }
                   })}
                 />
                 <div className='flex items-center justify-between'>
@@ -581,9 +586,9 @@ const Products = () => {
                             onClick={() =>
                               editWatch('imageUrl')
                                 ? editSetValue('imageUrl', '')
-                                : setProduct((prev) => ({
+                                : setProduct(prev => ({
                                     ...prev,
-                                    imageUrl: '',
+                                    imageUrl: ''
                                   }))
                             }
                           >
@@ -649,7 +654,7 @@ const Products = () => {
         </div>
       ) : null}
     </>
-  )
-}
+  );
+};
 
-export default Products
+export default Products;

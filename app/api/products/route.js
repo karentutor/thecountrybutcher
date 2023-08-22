@@ -10,8 +10,8 @@ export const POST = async (req) => {
 
     await connectMongoDB()
 
-    await Product.create({ title, description, price, imageUrl, special })
-
+    const product = await Product.create({ title, description, price, imageUrl, special })
+    if(!product) return new NextResponse('Internal error', { status: 500 })
     return NextResponse.json(
       { message: 'product created successfully' },
       { status: 201 }
